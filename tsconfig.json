@@ -20,8 +20,8 @@
 		],
 		"paths": {
 			"@/*": ["./*"],
-			"@app/*": ["app/*"],
-			"@public/*": ["public/*"]
+			"@app/*": ["./app/*"],
+			"@public/*": ["./public/*"]
 		}
 	},
 	"include": [
