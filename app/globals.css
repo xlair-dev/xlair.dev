@@ -10,3 +10,26 @@
 	--font-family-sans: var(--font-jost), var(--font-noto-sans-jp), "Jost",
 		"Noto Sans JP", "Noto Sans", sans-serif;
 }
+
+@keyframes obi-scroll {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: calc(var(--obi-width) * -1) 0;
+	}
+}
+
+.obi-strip {
+	--obi-height: clamp(48px, 10vw, 128px);
+	--obi-width: calc(var(--obi-height) * 2348 / 424);
+	height: var(--obi-height);
+	width: 100%;
+	background-image: url("/obi.png");
+	background-repeat: repeat-x;
+	background-size: var(--obi-width) var(--obi-height);
+	background-position: 0 0;
+	animation: obi-scroll 18s linear infinite;
+	will-change: background-position;
+}
