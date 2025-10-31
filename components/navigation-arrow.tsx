@@ -23,9 +23,7 @@ export default function NavigationArrow({
 			? `${size}px`
 			: size
 		: undefined;
-	const sizeProps = sizeValue
-		? { width: sizeValue, height: sizeValue }
-		: {};
+	const sizeProps = sizeValue ? { width: sizeValue, height: sizeValue } : {};
 
 	return (
 		<svg

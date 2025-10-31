@@ -14,7 +14,7 @@ export default function Home() {
 			/>
 			<main className="relative flex min-h-screen flex-col items-center justify-center px-4">
 				<div
-					className="absolute -left-16 top-0 h-screen w-auto opacity-80"
+					className="absolute -left-20 top-0 h-screen w-auto opacity-80"
 					style={{
 						maskImage: "linear-gradient(to bottom, transparent 0%, black 30%)",
 						WebkitMaskImage:

@@ -9,7 +9,9 @@ type ObiStripProps = {
 	height?: ResponsiveHeight;
 };
 
-function buildHeightStyle(height?: ResponsiveHeight): CSSProperties | undefined {
+function buildHeightStyle(
+	height?: ResponsiveHeight,
+): CSSProperties | undefined {
 	if (!height) {
 		return undefined;
 	}
@@ -37,10 +39,7 @@ function buildHeightStyle(height?: ResponsiveHeight): CSSProperties | undefined 
 	return properties as CSSProperties;
 }
 
-export default function ObiStrip({
-	className,
-	height,
-}: ObiStripProps) {
+export default function ObiStrip({ className, height }: ObiStripProps) {
 	const wrapperClassName = className
 		? `pointer-events-none absolute inset-x-0 top-0 select-none ${className}`
 		: "pointer-events-none absolute inset-x-0 top-0 select-none";
