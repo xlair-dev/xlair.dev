@@ -13,14 +13,16 @@ export default function Home() {
 				}}
 			/>
 		<main className="relative flex min-h-screen flex-col items-center justify-center px-4">
-		<Image
-			src="/effect.png"
-			alt=""
-			width={700}
-			height={1000}
-			className="absolute -left-16 top-0 h-screen w-auto opacity-80"
-			aria-hidden="true"
-		/>
+		<div className="absolute -left-16 top-0 h-screen w-auto opacity-80" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 30%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 30%)' }}>
+			<Image
+				src="/effect.png"
+				alt=""
+				width={700}
+				height={1000}
+				className="h-screen w-auto"
+				aria-hidden="true"
+			/>
+		</div>
 			<p className="text-brand-main text-sm sm:text-base md:text-lg lg:text-xl text-center">
 				ー リズム型アクションゲーム ー
 			</p>
