@@ -14,16 +14,22 @@ interface NavigationArrowProps
  * Designed to be placed between text elements with customizable size.
  */
 export default function NavigationArrow({
-	size = "1em",
+	size,
 	className = "",
 	...props
 }: NavigationArrowProps) {
-	const sizeValue = typeof size === "number" ? `${size}px` : size;
+	const sizeValue = size
+		? typeof size === "number"
+			? `${size}px`
+			: size
+		: undefined;
+	const sizeProps = sizeValue
+		? { width: sizeValue, height: sizeValue }
+		: {};
 
 	return (
 		<svg
-			width={sizeValue}
-			height={sizeValue}
+			{...sizeProps}
 			viewBox="0 0 24 24"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
