@@ -1,15 +1,17 @@
 import NavigationArrow from "@/components/navigation-arrow";
+import ObiStrip from "@/components/obi-strip";
 import Image from "next/image";
 
 export default function Home() {
 	return (
 		<>
-			<div
-				className="pointer-events-none fixed inset-x-0 top-0 z-30 select-none"
-				aria-hidden="true"
-			>
-				<div className="obi-strip" />
-			</div>
+			<ObiStrip
+				height={{
+					base: "160px",
+					sm: "240px",
+					lg: "320px",
+				}}
+			/>
 			<main className="flex min-h-screen flex-col items-center justify-center px-4">
 				<p className="text-brand-main text-sm sm:text-base md:text-lg lg:text-xl text-center">
 					ー リズム型アクションゲーム ー
