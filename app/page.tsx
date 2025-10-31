@@ -12,18 +12,26 @@ export default function Home() {
 					lg: "320px",
 				}}
 			/>
-			<main className="flex min-h-screen flex-col items-center justify-center px-4">
-				<p className="text-brand-main text-sm sm:text-base md:text-lg lg:text-xl text-center">
-					ー リズム型アクションゲーム ー
-				</p>
-				<Image
-					src="/logo.svg"
-					alt="xlair"
-					width={800}
-					height={400}
-					className="w-[90vw] sm:w-[80vw] h-auto max-w-[1080px]"
-					priority
-				/>
+		<main className="relative flex min-h-screen flex-col items-center justify-center px-4">
+		<Image
+			src="/effect.png"
+			alt=""
+			width={700}
+			height={1000}
+			className="absolute -left-16 top-0 h-screen w-auto opacity-80"
+			aria-hidden="true"
+		/>
+			<p className="text-brand-main text-sm sm:text-base md:text-lg lg:text-xl text-center">
+				ー リズム型アクションゲーム ー
+			</p>
+			<Image
+				src="/logo.svg"
+				alt="xlair"
+				width={800}	
+				height={400}
+				className="w-[90vw] sm:w-[80vw] h-auto max-w-[1080px]"
+				priority
+			/>
 				<div className="text-brand-main font-medium mt-4 sm:mt-6 flex flex-col sm:flex-row items-center gap-0 sm:gap-2 md:gap-3">
 					<div className="flex flex-row items-center text-3xl sm:text-3xl md:text-4xl lg:text-5xl">
 						<p>11.02</p>
