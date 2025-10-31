@@ -5,4 +5,8 @@
 	--color-brand-main: #18ace9;
 	--color-brand-main-light: #3ad0f5;
 	--color-brand-sub: #f495ea;
+
+	/* Font family */
+	--font-family-sans: var(--font-jost), var(--font-noto-sans-jp), "Jost",
+		"Noto Sans JP", "Noto Sans", sans-serif;
 }
