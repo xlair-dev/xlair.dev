@@ -42,8 +42,8 @@ export default function ObiStrip({
 	height,
 }: ObiStripProps) {
 	const wrapperClassName = className
-		? `pointer-events-none fixed inset-x-0 top-0 select-none ${className}`
-		: "pointer-events-none fixed inset-x-0 top-0 select-none";
+		? `pointer-events-none absolute inset-x-0 top-0 select-none ${className}`
+		: "pointer-events-none absolute inset-x-0 top-0 select-none";
 
 	const style = buildHeightStyle(height);
 
