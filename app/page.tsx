@@ -151,7 +151,7 @@ export default async function Home() {
 			<Footer />
 			<Link
 				href="/rankings"
-				className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 px-4 sm:px-8 md:px-10 py-2 sm:py-4 md:py-5 rounded-full border border-brand-sub bg-brand-sub-light text-brand-sub hover:text-white hover:bg-brand-sub transition-colors duration-300 text-sm sm:text-lg md:text-xl font-medium whitespace-nowrap z-50 flex items-center gap-2 sm:gap-4"
+				className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 px-4 sm:px-8 md:px-10 py-2 sm:py-4 md:py-5 rounded-full border border-brand-sub bg-white text-brand-sub hover:text-white hover:bg-brand-sub transition-colors duration-300 text-sm sm:text-lg md:text-xl font-medium whitespace-nowrap z-50 flex items-center gap-2 sm:gap-4"
 			>
 				<div className="w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 flex justify-center items-center relative shrink-0">
 					<Image
