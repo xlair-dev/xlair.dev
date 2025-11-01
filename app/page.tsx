@@ -85,6 +85,23 @@ export default function Home() {
 					</p>
 				</div>
 			</div>
+			<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-16 sm:my-20 md:my-24 lg:my-28">
+				<Heading>INFO</Heading>
+				<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 px-12 sm:px-16 md:px-20 lg:px-24 py-16 sm:py-20 md:py-24 lg:py-28">
+					<div className="flex flex-row items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-600 font-medium">
+						<p>11.02</p>
+						<NavigationArrow className="text-brand-main-light w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 translate-y-1" />
+						<p>11.03</p>
+					</div>
+					<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
+						筑波大学 2D304 教室
+					</p>
+					<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
+						<span className="text-gray-600">1PLAY</span>{" "}
+						<span className="text-brand-main">¥100</span>
+					</p>
+				</div>
+			</div>
 		</BrandBlurBackground>
 	);
 }
