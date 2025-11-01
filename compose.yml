@@ -5,11 +5,10 @@ services:
       dockerfile: Dockerfile
     container_name: xlair-dev
     ports:
-      - "${PORT:-3000}:3000"
+      - "${HOST_PORT:-3000}:3000"
     env_file:
       - .env
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
-      - PORT=${PORT:-3000}
     restart: unless-stopped
