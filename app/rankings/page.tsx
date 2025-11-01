@@ -10,6 +10,7 @@ import {
 	toDisplayEntries,
 } from "@/lib/rankings";
 import { Suspense } from "react";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -123,9 +124,36 @@ function RankingList({
 					key={`${selectedCategory.id}-${entry.rank}-${entry.displayName}`}
 					className="flex items-center gap-4 sm:gap-6 w-full"
 				>
-					<div className="w-16 sm:w-20 flex justify-center">
+					<div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 flex justify-center items-center relative">
+						{entry.rank === 1 && (
+							<Image
+								src="/icon_1st.svg"
+								alt=""
+								fill
+								className="object-contain -translate-y-3"
+								aria-hidden="true"
+							/>
+						)}
+						{entry.rank === 2 && (
+							<Image
+								src="/icon_2nd.svg"
+								alt=""
+								fill
+								className="object-contain -translate-y-3"
+								aria-hidden="true"
+							/>
+						)}
+						{entry.rank === 3 && (
+							<Image
+								src="/icon_3rd.svg"
+								alt=""
+								fill
+								className="object-contain -translate-y-3"
+								aria-hidden="true"
+							/>
+						)}
 						<span
-							className={`text-xl sm:text-2xl md:text-3xl font-semibold ${
+							className={`font-semibold relative z-10 flex items-baseline ${
 								entry.rank === 1
 									? "text-brand-sub"
 									: entry.rank === 2
@@ -133,19 +161,24 @@ function RankingList({
 										: "text-gray-600"
 							}`}
 						>
-							{formatOrdinal(entry.rank)}
+							<span className="text-4xl sm:text-5xl md:text-6xl">
+								{entry.rank}
+							</span>
+							<span className="text-xl sm:text-2xl md:text-3xl">
+								{formatOrdinal(entry.rank).replace(/\d+/, "")}
+							</span>
 						</span>
 					</div>
 					<div className="flex-1 rounded-3xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 bg-white/70 backdrop-blur">
-						<p className="text-gray-600 text-base sm:text-lg md:text-xl font-medium text-center sm:text-left">
+						<p className="text-gray-600 text-lg sm:text-xl md:text-2xl font-medium text-center sm:text-left">
 							{entry.displayName}
 						</p>
 						<div className="h-px bg-brand-sub my-3 sm:my-4" />
 						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-center sm:text-left">
-							<span className="text-gray-600 text-sm sm:text-base">
+							<span className="text-gray-600 text-base sm:text-lg">
 								{selectedCategory.valueLabel}
 							</span>
-							<span className="text-gray-600 text-lg sm:text-xl md:text-2xl font-semibold">
+							<span className="text-gray-600 text-xl sm:text-2xl md:text-3xl font-semibold">
 								{entry.value}
 							</span>
 						</div>
