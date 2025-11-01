@@ -60,7 +60,7 @@ export default function StatisticsSection({
 			<p className="text-brand-main text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
 				雙峰祭にて公開中！
 			</p>
-			<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-8 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
+			<div className="brand-border rounded-4xl sm:rounded-full w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-8 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
 				<StatisticsItem
 					label="総プレイ数"
 					value={statistics.totalCredits}
@@ -80,7 +80,3 @@ export default function StatisticsSection({
 		</div>
 	);
 }
-
-
-
-
