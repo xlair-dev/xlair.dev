@@ -21,9 +21,7 @@ async function fetchStatistics(): Promise<GlobalStatistics | null> {
 	const apiBaseUrl = process.env.API_BASE_URL;
 
 	if (!apiBaseUrl) {
-		console.warn(
-			"API_BASE_URL is not set. Statistics will not be displayed.",
-		);
+		console.warn("API_BASE_URL is not set. Statistics will not be displayed.");
 		return null;
 	}
 
