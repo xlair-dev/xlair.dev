@@ -43,7 +43,7 @@ const byPrefixAndName = {
  */
 export default function Footer() {
 	return (
-		<footer className="bg-white w-full pt-12 pb-15 sm:pb-12 px-4 sm:px-6 md:px-8 lg:px-12">
+		<footer className="bg-white w-full pt-12 pb-14 sm:pb-12 px-4 sm:px-6 md:px-8 lg:px-12">
 			<div className="max-w-[90vw] mx-auto">
 				{/* Desktop layout */}
 				<div className="hidden sm:flex justify-between items-center">
