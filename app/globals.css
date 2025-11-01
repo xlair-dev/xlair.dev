@@ -38,3 +38,11 @@
 		--rb-border-width: 7px;
 	}
 }
+
+details > summary {
+	list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+	display: none;
+}
