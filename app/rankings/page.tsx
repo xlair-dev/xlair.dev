@@ -212,10 +212,10 @@ export default async function RankingsPage(props: RankingsPageProps) {
 					lg: "240px",
 				}}
 			/>
-			<main className="relative min-h-svh flex flex-col items-center gap-8 sm:gap-10 md:gap-12 px-4 pb-24 pt-32 sm:pt-40">
+			<main className="relative min-h-svh flex flex-col items-center gap-4 sm:gap-6 md:gap-8 px-4 pb-24 pt-32 sm:pt-40">
 				<div className="flex flex-col items-center gap-4 sm:gap-6 text-center">
 					<Heading className="justify-center">RANKING</Heading>
-					<p className="text-gray-600 text-xs sm:text-base md:text-lg leading-relaxed">
+					<p className="text-gray-600 text-xs sm:text-base md:text-lg leading-relaxed my-6 sm:my-12 md:my-16">
 						雙峰祭期間中のプレイヤーのレートや
 						XP、各楽曲のハイスコアを確認できます。
 						<br />
