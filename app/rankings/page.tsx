@@ -9,8 +9,8 @@ import {
 	rankingCategories,
 	toDisplayEntries,
 } from "@/lib/rankings";
-import { Suspense } from "react";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -93,7 +93,6 @@ async function fetchRankingEntries(
 	}
 }
 
-
 function RankingList({
 	entries,
 	selectedCategory,
@@ -122,7 +121,7 @@ function RankingList({
 			{entries.map((entry) => (
 				<div
 					key={`${selectedCategory.id}-${entry.rank}-${entry.displayName}`}
-					className="flex items-center gap-4 sm:gap-6 w-full"
+					className="flex items-center gap-2 sm:gap-6 w-full"
 				>
 					<div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 flex justify-center items-center relative">
 						{entry.rank === 1 && (
@@ -169,13 +168,13 @@ function RankingList({
 							</span>
 						</span>
 					</div>
-					<div className="flex-1 rounded-3xl px-6 sm:px-8 md:px-10 py-4 sm:py-5">
+					<div className="flex-1 rounded-3xl px-4 sm:px-6 md:px-10 py-4 sm:py-5">
 						<p className="text-gray-600 text-lg sm:text-xl md:text-2xl font-medium text-center sm:text-left">
 							{entry.displayName}
 						</p>
 						<div className="h-px bg-brand-sub my-3 sm:my-4" />
 						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-center sm:text-left">
-							<span className="text-gray-600 text-base sm:text-lg">
+							<span className="hidden sm:inline text-gray-600 text-base sm:text-lg">
 								{selectedCategory.valueLabel}
 							</span>
 							<span className="text-gray-600 text-xl sm:text-2xl md:text-3xl font-semibold">
