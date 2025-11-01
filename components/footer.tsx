@@ -1,4 +1,5 @@
 import {
+	type IconDefinition,
 	type IconName,
 	findIconDefinition,
 } from "@fortawesome/fontawesome-svg-core";
@@ -13,17 +14,26 @@ library.add(fas, far, fab);
 
 // Helper object to get icon by prefix and name
 const byPrefixAndName = {
-	far: new Proxy({} as Record<string, any>, {
+	far: new Proxy({} as Record<string, IconDefinition>, {
 		get: (_target, prop: string) =>
-			findIconDefinition({ prefix: "far", iconName: prop as IconName }),
+			findIconDefinition({
+				prefix: "far",
+				iconName: prop as IconName,
+			}) as IconDefinition,
 	}),
-	fab: new Proxy({} as Record<string, any>, {
+	fab: new Proxy({} as Record<string, IconDefinition>, {
 		get: (_target, prop: string) =>
-			findIconDefinition({ prefix: "fab", iconName: prop as IconName }),
+			findIconDefinition({
+				prefix: "fab",
+				iconName: prop as IconName,
+			}) as IconDefinition,
 	}),
-	fas: new Proxy({} as Record<string, any>, {
+	fas: new Proxy({} as Record<string, IconDefinition>, {
 		get: (_target, prop: string) =>
-			findIconDefinition({ prefix: "fas", iconName: prop as IconName }),
+			findIconDefinition({
+				prefix: "fas",
+				iconName: prop as IconName,
+			}) as IconDefinition,
 	}),
 };
 
@@ -74,7 +84,7 @@ export default function Footer() {
 							aria-label="Email"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.far["envelope"]}
+								icon={byPrefixAndName.far.envelope}
 								className="text-lg sm:text-xl"
 							/>
 						</a>
@@ -98,7 +108,7 @@ export default function Footer() {
 							aria-label="GitHub"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.fab["github"]}
+								icon={byPrefixAndName.fab.github}
 								className="text-lg sm:text-xl"
 							/>
 						</a>
@@ -114,7 +124,7 @@ export default function Footer() {
 							aria-label="Email"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.far["envelope"]}
+								icon={byPrefixAndName.far.envelope}
 								className="text-xl"
 							/>
 						</a>
@@ -138,7 +148,7 @@ export default function Footer() {
 							aria-label="GitHub"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.fab["github"]}
+								icon={byPrefixAndName.fab.github}
 								className="text-xl"
 							/>
 						</a>
