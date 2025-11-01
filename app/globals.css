@@ -15,7 +15,8 @@
 	--rb-color-1: var(--color-brand-main);
 	--rb-color-2: #6adefc;
 	--rb-color-3: #f495ea;
-	border: double 5px transparent;
+	--rb-border-width: 5px;
+	border: double var(--rb-border-width) transparent;
 	background-image: linear-gradient(#ffffff, #ffffff),
 		conic-gradient(
 			var(--rb-color-1) 0deg 40deg,
@@ -30,4 +31,10 @@
 		);
 	background-origin: border-box;
 	background-clip: padding-box, border-box;
+}
+
+@media (min-width: 640px) {
+	.brand-border {
+		--rb-border-width: 7px;
+	}
 }
