@@ -15,9 +15,9 @@ export default function Home() {
 					lg: "320px",
 				}}
 			/>
-			<main className="relative min-h-screen flex flex-col items-center justify-center px-4">
+			<main className="relative min-h-svh flex flex-col items-center justify-center px-4">
 				<div
-					className="absolute -left-20 top-0 h-screen w-auto opacity-80"
+					className="absolute -left-20 top-0 h-svh w-auto opacity-80"
 					style={{
 						maskImage: "linear-gradient(to bottom, transparent 0%, black 30%)",
 						WebkitMaskImage:
@@ -29,7 +29,7 @@ export default function Home() {
 						alt=""
 						width={700}
 						height={1000}
-						className="h-screen w-auto"
+						className="h-svh w-auto"
 						aria-hidden="true"
 					/>
 				</div>
