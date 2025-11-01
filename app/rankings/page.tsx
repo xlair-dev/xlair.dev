@@ -123,7 +123,7 @@ function RankingList({
 					key={`${selectedCategory.id}-${entry.rank}-${entry.displayName}`}
 					className="flex items-center gap-2 sm:gap-6 w-full"
 				>
-					<div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 flex justify-center items-center relative">
+					<div className="w-16 sm:w-24 md:w-28 h-16 sm:h-24 md:h-28 flex justify-center items-center relative">
 						{entry.rank === 1 && (
 							<Image
 								src="/icon_1st.svg"
@@ -160,10 +160,10 @@ function RankingList({
 										: "text-gray-600"
 							}`}
 						>
-							<span className="text-4xl sm:text-5xl md:text-6xl">
+							<span className="text-3xl sm:text-5xl md:text-6xl">
 								{entry.rank}
 							</span>
-							<span className="text-xl sm:text-2xl md:text-3xl">
+							<span className="text-lg sm:text-2xl md:text-3xl">
 								{formatOrdinal(entry.rank).replace(/\d+/, "")}
 							</span>
 						</span>
