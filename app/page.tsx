@@ -5,6 +5,7 @@ import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import StatisticsSection from "@/components/statistics-section";
 import Image from "next/image";
+import Link from "next/link";
 
 interface GlobalStatistics {
 	totalCredits: number;
@@ -148,6 +149,25 @@ export default async function Home() {
 				</div>
 			</div>
 			<Footer />
+			<Link
+				href="/rankings"
+				className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 px-4 sm:px-8 md:px-10 py-2 sm:py-4 md:py-5 rounded-full border border-brand-sub bg-white text-brand-sub hover:text-white hover:bg-brand-sub transition-colors duration-300 text-sm sm:text-lg md:text-xl font-medium whitespace-nowrap z-50 flex items-center gap-2 sm:gap-4"
+			>
+				<div className="w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 flex justify-center items-center relative shrink-0">
+					<Image
+						src="/icon_1st.svg"
+						alt=""
+						fill
+						className="object-contain -translate-y-1 sm:-translate-y-3"
+						aria-hidden="true"
+					/>
+					<span className="font-semibold relative z-10 flex items-baseline text-brand-sub">
+						<span className="text-xl sm:text-3xl md:text-4xl">1</span>
+						<span className="text-xs sm:text-lg md:text-xl">st</span>
+					</span>
+				</div>
+				ランキングはこちら！
+			</Link>
 		</BrandBlurBackground>
 	);
 }
