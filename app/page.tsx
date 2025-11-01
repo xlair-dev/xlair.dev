@@ -3,9 +3,52 @@ import Footer from "@/components/footer";
 import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
+import StatisticsSection from "@/components/statistics-section";
 import Image from "next/image";
 
-export default function Home() {
+interface GlobalStatistics {
+	totalCredits: number;
+	totalUsers: number;
+	totalScore: number;
+}
+
+/**
+ * Fetches global statistics from the API server.
+ * @returns Global statistics or null if fetch fails
+ * @requires API_BASE_URL - Base URL of the API server
+ */
+async function fetchStatistics(): Promise<GlobalStatistics | null> {
+	const apiBaseUrl = process.env.API_BASE_URL;
+
+	if (!apiBaseUrl) {
+		console.warn(
+			"API_BASE_URL is not set. Statistics will not be displayed.",
+		);
+		return null;
+	}
+
+	try {
+		const response = await fetch(`${apiBaseUrl}/statistics/summary`, {
+			// Revalidate every 60 seconds
+			next: { revalidate: 5 },
+		});
+
+		if (!response.ok) {
+			console.error(
+				`Failed to fetch statistics: ${response.status} ${response.statusText}`,
+			);
+			return null;
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error("Error fetching statistics:", error);
+		return null;
+	}
+}
+
+export default async function Home() {
+	const statistics = await fetchStatistics();
 	return (
 		<BrandBlurBackground offset="95vh">
 			<ObiStrip
@@ -87,6 +130,7 @@ export default function Home() {
 						</p>
 					</div>
 				</div>
+				{statistics && <StatisticsSection statistics={statistics} />}
 				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
 					<Heading>INFO</Heading>
 					<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 px-12 sm:px-16 md:px-20 lg:px-24 py-8 sm:py-20 md:py-24 lg:py-28">
