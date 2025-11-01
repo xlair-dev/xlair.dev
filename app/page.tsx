@@ -1,4 +1,5 @@
 import BrandBlurBackground from "@/components/brand-blur-background";
+import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import Image from "next/image";
@@ -55,6 +56,29 @@ export default function Home() {
 					</div>
 				</div>
 			</main>
+			<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-16 sm:my-20 md:my-24 lg:my-28">
+					<Heading>ABOUT</Heading>
+					<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 text-center">
+						<div className="flex items-end gap-1 sm:gap-3 md:gap-4">
+							<Image
+								src="/logo.svg"
+								alt="XLAIR"
+								width={200}
+								height={100}
+								className="w-40 sm:w-72 md:w-80 lg:w-96 h-auto"
+							/>
+							<p className="text-brand-main text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
+								とは
+							</p>
+						</div>
+						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
+							画面に流れるノーツに合わせて、<br />スライダーをなぞったりボタンを押したりして<br />楽曲を演奏するオリジナルリズム型アクションゲームです。
+						</p>
+						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
+							実際の筐体を使って操作し、<br />音楽に合わせて手を動かす楽しさをぜひ体験してください。
+						</p>
+					</div>
+				</div>
 		</BrandBlurBackground>
 	);
 }
