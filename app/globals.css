@@ -10,3 +10,25 @@
 	--font-family-sans: var(--font-jost), var(--font-noto-sans-jp), "Jost",
 		"Noto Sans JP", "Noto Sans", sans-serif;
 }
+
+.brand-border {
+	--rb-color-1: var(--color-brand-main);
+	--rb-color-2: #6adefc;
+	--rb-color-3: #f495ea;
+	--rb-fill-color: var(--brand-border-fill, #ffffff);
+	border: double 5px transparent;
+	background-image: linear-gradient(var(--rb-fill-color), var(--rb-fill-color)),
+		conic-gradient(
+			var(--rb-color-1) 0deg 40deg,
+			var(--rb-color-2) 40deg 80deg,
+			var(--rb-color-3) 80deg 120deg,
+			var(--rb-color-1) 120deg 160deg,
+			var(--rb-color-2) 160deg 200deg,
+			var(--rb-color-3) 200deg 240deg,
+			var(--rb-color-1) 240deg 280deg,
+			var(--rb-color-2) 280deg 320deg,
+			var(--rb-color-3) 320deg 360deg
+		);
+	background-origin: border-box;
+	background-clip: padding-box, border-box;
+}
