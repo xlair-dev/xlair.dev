@@ -10,7 +10,18 @@ import {
 	toDisplayEntries,
 } from "@/lib/rankings";
 import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
+import {
+	type IconDefinition,
+	type IconName,
+	findIconDefinition,
+	library,
+} from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+library.add(fas);
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +42,17 @@ const ORDINAL_SUFFIX_MAP: Record<number, string> = {
 	1: "st",
 	2: "nd",
 	3: "rd",
+};
+
+// Helper object to get icon by prefix and name
+const byPrefixAndName = {
+	fas: new Proxy({} as Record<string, IconDefinition>, {
+		get: (_target, prop: string) =>
+			findIconDefinition({
+				prefix: "fas",
+				iconName: prop as IconName,
+			}) as IconDefinition,
+	}),
 };
 
 /**
@@ -212,6 +234,16 @@ export default async function RankingsPage(props: RankingsPageProps) {
 					lg: "240px",
 				}}
 			/>
+			<Link
+				href="/"
+				className="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-brand-main bg-brand-main-light-bg text-brand-main hover:text-white hover:bg-brand-main transition-colors duration-300 flex items-center justify-center z-50"
+				aria-label="トップページに戻る"
+			>
+				<FontAwesomeIcon
+					icon={byPrefixAndName.fas["arrow-left"]}
+					className="text-base sm:text-lg md:text-xl"
+				/>
+			</Link>
 			<main className="relative min-h-svh flex flex-col items-center gap-4 sm:gap-6 md:gap-8 px-4 pb-24 pt-32 sm:pt-40">
 				<div className="flex flex-col items-center gap-4 sm:gap-6 text-center">
 					<Heading className="justify-center">RANKING</Heading>
