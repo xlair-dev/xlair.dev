@@ -236,12 +236,12 @@ export default async function RankingsPage(props: RankingsPageProps) {
 			/>
 			<Link
 				href="/"
-				className="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-brand-main bg-brand-main-light-bg text-brand-main hover:text-white hover:bg-brand-main transition-colors duration-300 flex items-center justify-center z-50"
+				className="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full border border-brand-main bg-white text-brand-main hover:text-white hover:bg-brand-main transition-colors duration-300 flex items-center justify-center z-50"
 				aria-label="トップページに戻る"
 			>
 				<FontAwesomeIcon
 					icon={byPrefixAndName.fas["arrow-left"]}
-					className="text-base sm:text-lg md:text-xl"
+					className="text-base sm:text-lg md:text-xl lg:text-2xl"
 				/>
 			</Link>
 			<main className="relative min-h-svh flex flex-col items-center gap-4 sm:gap-6 md:gap-8 px-4 pb-24 pt-32 sm:pt-40">
