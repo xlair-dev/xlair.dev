@@ -1,10 +1,11 @@
+import BrandBlurBackground from "@/components/brand-blur-background";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import Image from "next/image";
 
 export default function Home() {
 	return (
-		<>
+		<BrandBlurBackground offset="95vh">
 			<ObiStrip
 				height={{
 					base: "160px",
@@ -12,7 +13,7 @@ export default function Home() {
 					lg: "320px",
 				}}
 			/>
-			<main className="relative flex min-h-screen flex-col items-center justify-center px-4">
+			<main className="relative min-h-screen flex flex-col items-center justify-center px-4">
 				<div
 					className="absolute -left-20 top-0 h-screen w-auto opacity-80"
 					style={{
@@ -54,6 +55,6 @@ export default function Home() {
 					</div>
 				</div>
 			</main>
-		</>
+		</BrandBlurBackground>
 	);
 }
