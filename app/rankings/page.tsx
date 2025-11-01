@@ -169,7 +169,7 @@ function RankingList({
 							</span>
 						</span>
 					</div>
-					<div className="flex-1 rounded-3xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 bg-white/70 backdrop-blur">
+					<div className="flex-1 rounded-3xl px-6 sm:px-8 md:px-10 py-4 sm:py-5">
 						<p className="text-gray-600 text-lg sm:text-xl md:text-2xl font-medium text-center sm:text-left">
 							{entry.displayName}
 						</p>
