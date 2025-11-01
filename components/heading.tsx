@@ -50,7 +50,9 @@ export default function Heading({
 		: `${defaultTextClasses} ${textSizeClassName}`;
 
 	return (
-		<div className={`flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 ${className}`}>
+		<div
+			className={`flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 ${className}`}
+		>
 			<TopLeftTriangle
 				className={`${triangleClassName} ${triangleSizeClassName}`}
 			/>
