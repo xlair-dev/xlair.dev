@@ -18,6 +18,12 @@ const jost = Jost({
 
 export const metadata: Metadata = {
 	title: "xlair.dev",
+	icons: {
+		icon: "/favicon.svg",
+	},
+	openGraph: {
+		images: ["/og.png"],
+	},
 };
 
 export default function RootLayout({
