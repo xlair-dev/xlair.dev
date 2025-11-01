@@ -158,7 +158,7 @@ export default async function Home() {
 						src="/icon_1st.svg"
 						alt=""
 						fill
-						className="object-contain -translate-y-3"
+						className="object-contain -translate-y-1 sm:-translate-y-3"
 						aria-hidden="true"
 					/>
 					<span className="font-semibold relative z-10 flex items-baseline text-brand-sub">
