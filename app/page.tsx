@@ -56,33 +56,52 @@ export default function Home() {
 					</div>
 				</div>
 			</main>
-			<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-16 sm:my-20 md:my-24 lg:my-28">
-				<Heading>ABOUT</Heading>
-				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 text-center">
-					<div className="flex items-end gap-1 sm:gap-3 md:gap-4">
-						<Image
-							src="/logo.svg"
-							alt="XLAIR"
-							width={200}
-							height={100}
-							className="w-40 sm:w-72 md:w-80 lg:w-96 h-auto"
-						/>
-						<p className="text-brand-main text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
-							とは
+			<div className="flex flex-col items-center gap-6 sm:gap-9 md:gap-12 lg:gap-16 my-16 sm:my-20 md:my-24 lg:my-28">
+				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
+					<Heading>ABOUT</Heading>
+					<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 text-center">
+						<div className="flex items-end gap-1 sm:gap-3 md:gap-4">
+							<Image
+								src="/logo.svg"
+								alt="XLAIR"
+								width={200}
+								height={100}
+								className="w-40 sm:w-72 md:w-80 lg:w-96 h-auto"
+							/>
+							<p className="text-brand-main text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
+								とは
+							</p>
+						</div>
+						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
+							画面に流れるノーツに合わせて、
+							<br />
+							スライダーをなぞったりボタンを押したりして
+							<br />
+							楽曲を演奏するオリジナルリズム型アクションゲームです。
+						</p>
+						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
+							実際の筐体を使って操作し、
+							<br />
+							音楽に合わせて手を動かす楽しさをぜひ体験してください。
 						</p>
 					</div>
-					<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
-						画面に流れるノーツに合わせて、
-						<br />
-						スライダーをなぞったりボタンを押したりして
-						<br />
-						楽曲を演奏するオリジナルリズム型アクションゲームです。
-					</p>
-					<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
-						実際の筐体を使って操作し、
-						<br />
-						音楽に合わせて手を動かす楽しさをぜひ体験してください。
-					</p>
+				</div>
+				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
+					<Heading>INFO</Heading>
+					<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 px-12 sm:px-16 md:px-20 lg:px-24 py-8 sm:py-20 md:py-24 lg:py-28">
+						<div className="flex flex-row items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-600 font-medium">
+							<p>11.02</p>
+							<NavigationArrow className="text-brand-main-light w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 translate-y-1" />
+							<p>11.03</p>
+						</div>
+						<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
+							筑波大学 2D304 教室
+						</p>
+						<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
+							<span className="text-gray-600">1PLAY</span>{" "}
+							<span className="text-brand-main">¥100</span>
+						</p>
+					</div>
 				</div>
 			</div>
 		</BrandBlurBackground>
