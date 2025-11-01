@@ -1,4 +1,5 @@
 import BrandBlurBackground from "@/components/brand-blur-background";
+import Footer from "@/components/footer";
 import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
@@ -104,6 +105,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</BrandBlurBackground>
 	);
 }
