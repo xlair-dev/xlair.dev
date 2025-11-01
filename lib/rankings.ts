@@ -1,14 +1,14 @@
 /**
  * Sheet ID for the song "AXCEL³".
- * Replace with the actual sheet ID once it is confirmed.
+ * Retrieved from environment variable TMP_AXCEL3_SHEET_ID.
  */
-export const SHEET_AXCEL3_ID = "REPLACE_WITH_AXCEL3_SHEET_ID";
+export const SHEET_AXCEL3_ID = process.env.TMP_AXCEL3_SHEET_ID;
 
 /**
  * Sheet ID for the song "Everything".
- * Replace with the actual sheet ID once it is confirmed.
+ * Retrieved from environment variable TMP_EVERYTHING_SHEET_ID.
  */
-export const SHEET_EVERYTHING_ID = "REPLACE_WITH_EVERYTHING_SHEET_ID";
+export const SHEET_EVERYTHING_ID = process.env.TMP_EVERYTHING_SHEET_ID;
 
 export type RankingValueKey = "score" | "totalScore" | "rating" | "xp";
 
