@@ -9,9 +9,6 @@ import {
 	rankingCategories,
 	toDisplayEntries,
 } from "@/lib/rankings";
-import Image from "next/image";
-import Link from "next/link";
-import { Suspense } from "react";
 import {
 	type IconDefinition,
 	type IconName,
@@ -20,6 +17,9 @@ import {
 } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
 
 library.add(fas);
 
