@@ -120,12 +120,20 @@ function RankingList({
 					className="flex items-center gap-4 sm:gap-6 w-full"
 				>
 					<div className="w-16 sm:w-20 flex justify-center">
-						<span className="text-brand-main text-xl sm:text-2xl md:text-3xl font-semibold">
+						<span
+							className={`text-xl sm:text-2xl md:text-3xl font-semibold ${
+								entry.rank === 1
+									? "text-brand-sub"
+									: entry.rank === 2
+										? "text-brand-main"
+										: "text-gray-600"
+							}`}
+						>
 							{formatOrdinal(entry.rank)}
 						</span>
 					</div>
-					<div className="flex-1 border border-brand-sub/40 rounded-3xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 bg-white/70 backdrop-blur">
-						<p className="text-gray-800 text-base sm:text-lg md:text-xl font-medium text-center sm:text-left">
+					<div className="flex-1 rounded-3xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 bg-white/70 backdrop-blur">
+						<p className="text-gray-600 text-base sm:text-lg md:text-xl font-medium text-center sm:text-left">
 							{entry.displayName}
 						</p>
 						<div className="h-px bg-brand-sub my-3 sm:my-4" />
@@ -133,8 +141,8 @@ function RankingList({
 							<span className="text-gray-600 text-sm sm:text-base">
 								{selectedCategory.valueLabel}
 							</span>
-							<span className="text-brand-main text-lg sm:text-xl md:text-2xl font-semibold">
-								{entry.value.toLocaleString("ja-JP")}
+							<span className="text-gray-600 text-lg sm:text-xl md:text-2xl font-semibold">
+								{entry.value}
 							</span>
 						</div>
 					</div>

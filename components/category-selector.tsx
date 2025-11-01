@@ -43,11 +43,11 @@ export function CategorySelector({
 		<div className="relative">
 			<details ref={detailsRef} className="relative group">
 				<summary
-					className="bg-brand-sub text-white text-sm sm:text-base md:text-lg font-medium px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 rounded-full shadow-md hover:opacity-90 transition-opacity cursor-pointer flex items-center justify-center gap-2"
+					className="border border-brand-sub text-brand-sub text-sm sm:text-base md:text-lg font-medium px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 rounded-full cursor-pointer flex items-center justify-center gap-4"
 					style={{ listStyle: "none" }}
 				>
 					<span>{selectedCategory.label}</span>
-					<span aria-hidden="true" className="text-white text-xs sm:text-sm">
+					<span aria-hidden="true" className="text-brand-sub text-xs sm:text-sm">
 						▼
 					</span>
 				</summary>
@@ -57,7 +57,7 @@ export function CategorySelector({
 							key={category.id}
 							type="button"
 							onClick={() => handleCategoryChange(category.id)}
-							className={`w-full text-sm sm:text-base text-gray-700 px-4 py-3 transition-colors text-left rounded-3xl ${
+							className={`w-full text-sm sm:text-base text-gray-700 px-4 py-3 transition-colors duration-300 text-left rounded-3xl ${
 								category.id === selectedCategory.id
 									? "bg-brand-sub/15 font-semibold"
 									: "hover:bg-brand-sub/10"
