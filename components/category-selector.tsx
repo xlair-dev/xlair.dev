@@ -1,12 +1,13 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useMemo } from "react";
 import type { RankingCategoryOption } from "@/lib/rankings";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useRef } from "react";
 
 /**
  * Category selector dropdown for rankings page.
  * Synchronizes selected category with URL query parameters.
+ * Categories array must contain at least one entry.
  */
 export function CategorySelector({
 	categories,
@@ -25,13 +26,21 @@ export function CategorySelector({
 			categories.find((category) => category.id === categoryId) ?? categories[0]
 		);
 	}, [searchParams, categories]);
+	const previousCategoryId = useRef(selectedCategory.id);
 
 	// Close details when category changes
 	useEffect(() => {
-		if (detailsRef.current) {
-			detailsRef.current.open = false;
+		if (!detailsRef.current) {
+			return;
 		}
-	}, [searchParams]);
+
+		if (previousCategoryId.current === selectedCategory.id) {
+			return;
+		}
+
+		detailsRef.current.open = false;
+		previousCategoryId.current = selectedCategory.id;
+	}, [selectedCategory.id]);
 
 	const handleCategoryChange = (categoryId: string) => {
 		const params = new URLSearchParams(searchParams.toString());
@@ -47,7 +56,10 @@ export function CategorySelector({
 					style={{ listStyle: "none" }}
 				>
 					<span>{selectedCategory.label}</span>
-					<span aria-hidden="true" className="text-brand-sub text-xs sm:text-sm">
+					<span
+						aria-hidden="true"
+						className="text-brand-sub text-xs sm:text-sm"
+					>
 						▼
 					</span>
 				</summary>
@@ -71,4 +83,3 @@ export function CategorySelector({
 		</div>
 	);
 }
-
