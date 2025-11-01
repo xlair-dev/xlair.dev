@@ -18,6 +18,10 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Accept build argument for SITE_URL
+ARG SITE_URL
+ENV SITE_URL=$SITE_URL
+
 # Set environment variable for production build
 ENV NEXT_TELEMETRY_DISABLED=1
 
