@@ -5,6 +5,12 @@ import Image from "next/image";
 export default function Home() {
 	return (
 		<div className="brand-blur-background">
+			<div className="brand-blur-layer" aria-hidden="true">
+				<span className="brand-blur-orbit brand-blur-orbit--1" />
+				<span className="brand-blur-orbit brand-blur-orbit--2" />
+				<span className="brand-blur-orbit brand-blur-orbit--3 brand-blur-orbit--reverse" />
+				<span className="brand-blur-orbit brand-blur-orbit--4 brand-blur-orbit--reverse" />
+			</div>
 			<ObiStrip
 				height={{
 					base: "160px",
