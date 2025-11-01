@@ -16,12 +16,26 @@ const jost = Jost({
 	display: "swap",
 });
 
+const siteUrl = process.env.SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
-	title: "xlair.dev",
-	icons: {
-		icon: "/favicon.svg",
-	},
+	metadataBase: new URL(siteUrl),
+	title: "音ゲー「XLAIR」公式 Webサイト",
+	description:
+		"新作音ゲーム「XLAIR」を、筑波大学 雙峰祭2025 にて展示します。XLAIR は、画面に表示されるノーツに合わせてスライダーをなぞったりボタンを押したりすることで楽曲を演奏する、リズムアクション型の音楽ゲームです。当日はぜひ 2D304 にお越しください！",
 	openGraph: {
+		title: "音ゲー「XLAIR」公式 Webサイト",
+		url: siteUrl,
+		images: [
+			{
+				url: "/og.png",
+				width: 1200,
+				height: 630,
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
 		images: ["/og.png"],
 	},
 };
