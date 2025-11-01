@@ -101,19 +101,22 @@
 
 @keyframes brand-blur-orbit-cw {
 	0% {
-		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) + 0deg));
+		transform: translate(-50%, -50%)
+			rotate(calc(var(--brand-blur-angle) + 0deg));
 	}
 	100% {
-		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) + 360deg));
+		transform: translate(-50%, -50%)
+			rotate(calc(var(--brand-blur-angle) + 360deg));
 	}
 }
 
 @keyframes brand-blur-orbit-ccw {
 	0% {
-		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) + 0deg));
+		transform: translate(-50%, -50%)
+			rotate(calc(var(--brand-blur-angle) + 0deg));
 	}
 	100% {
-		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) - 360deg));
+		transform: translate(-50%, -50%)
+			rotate(calc(var(--brand-blur-angle) - 360deg));
 	}
 }
-
