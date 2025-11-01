@@ -1,10 +1,10 @@
-/* Brand color blur background effect */
 .brand-blur-background {
 	position: relative;
 	overflow: hidden;
 }
 
 .brand-blur-layer {
+	--brand-blur-offset: 0;
 	position: absolute;
 	inset: -48px;
 	z-index: -1;
@@ -62,7 +62,7 @@
 	--brand-blur-duration: 10s;
 	--brand-blur-delay: 2.5s;
 	--brand-blur-origin-x: calc(110vw + 8vh);
-	--brand-blur-origin-y: calc(95vh + 40vw + 25vh);
+	--brand-blur-origin-y: calc(40vw + 25vh + var(--brand-blur-offset));
 	--brand-blur-angle: 20deg;
 }
 
@@ -73,7 +73,7 @@
 	--brand-blur-duration: 7s;
 	--brand-blur-delay: 3.5s;
 	--brand-blur-origin-x: calc(-10vw - 8vh);
-	--brand-blur-origin-y: calc(95vh + 80vw + 40vh);
+	--brand-blur-origin-y: calc(80vw + 40vh + var(--brand-blur-offset));
 	--brand-blur-angle: 40deg;
 }
 
@@ -84,7 +84,7 @@
 	--brand-blur-duration: 7s;
 	--brand-blur-delay: 5.625s;
 	--brand-blur-origin-x: calc(110vw + 8vh);
-	--brand-blur-origin-y: calc(95vh + 120vw + 55vh);
+	--brand-blur-origin-y: calc(120vw + 55vh + var(--brand-blur-offset));
 	--brand-blur-angle: -30deg;
 }
 
@@ -95,7 +95,7 @@
 	--brand-blur-duration: 10s;
 	--brand-blur-delay: 0s;
 	--brand-blur-origin-x: calc(-10vw - 8vh);
-	--brand-blur-origin-y: calc(95vh + 160vw + 70vh);
+	--brand-blur-origin-y: calc(160vw + 70vh + var(--brand-blur-offset));
 	--brand-blur-angle: -10deg;
 }
 
@@ -116,3 +116,4 @@
 		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) - 360deg));
 	}
 }
+

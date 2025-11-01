@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Home() {
 	return (
-		<BrandBlurBackground>
+		<BrandBlurBackground offset="95vh">
 			<ObiStrip
 				height={{
 					base: "160px",
