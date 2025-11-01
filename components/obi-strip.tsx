@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import "./obi-strip.css";
 
 type ResponsiveHeight =
 	| string
