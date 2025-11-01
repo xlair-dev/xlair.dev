@@ -2,6 +2,7 @@ import BrandBlurBackground from "@/components/brand-blur-background";
 import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
+import Footer from "@/components/footer";
 import Image from "next/image";
 
 export default function Home() {
@@ -104,6 +105,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</BrandBlurBackground>
 	);
 }
