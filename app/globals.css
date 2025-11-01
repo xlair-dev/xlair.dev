@@ -15,9 +15,8 @@
 	--rb-color-1: var(--color-brand-main);
 	--rb-color-2: #6adefc;
 	--rb-color-3: #f495ea;
-	--rb-fill-color: var(--brand-border-fill, #ffffff);
 	border: double 5px transparent;
-	background-image: linear-gradient(var(--rb-fill-color), var(--rb-fill-color)),
+	background-image: linear-gradient(#ffffff, #ffffff),
 		conic-gradient(
 			var(--rb-color-1) 0deg 40deg,
 			var(--rb-color-2) 40deg 80deg,
