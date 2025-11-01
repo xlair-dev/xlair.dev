@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/xlair-dev/xlair.dev:latest
     container_name: xlair-dev
     ports:
       - "${HOST_PORT:-3000}:3000"
