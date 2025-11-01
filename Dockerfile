@@ -22,6 +22,10 @@ COPY . .
 ARG SITE_URL
 ENV SITE_URL=$SITE_URL
 
+# Accept build argument for API_BASE_URL
+ARG API_BASE_URL
+ENV API_BASE_URL=$API_BASE_URL
+
 # Set environment variable for production build
 ENV NEXT_TELEMETRY_DISABLED=1
 
