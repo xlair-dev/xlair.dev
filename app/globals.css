@@ -69,3 +69,54 @@
 		--obi-height-active: var(--obi-height-2xl);
 	}
 }
+
+/* Brand color blur background effect */
+.brand-blur-background {
+	position: relative;
+	overflow: hidden;
+}
+
+.brand-blur-background::before,
+.brand-blur-background::after {
+	content: "";
+	position: absolute;
+	inset: -48px;
+	z-index: -1;
+	pointer-events: none;
+	background-repeat: no-repeat;
+	filter: blur(0px);
+	transform-origin: center;
+	will-change: transform;
+}
+
+.brand-blur-background::before {
+	background-image:
+		radial-gradient(12vw 12vw at 12% 22%, rgba(24, 172, 233, 0.55) 0 55%, transparent 60%),
+		radial-gradient(10vw 10vw at 78% 18%, rgba(58, 208, 245, 0.55) 0 50%, transparent 60%);
+	animation: brand-blur-spin-cw 60s linear infinite;
+}
+
+.brand-blur-background::after {
+	background-image:
+		radial-gradient(14vw 14vw at 85% 78%, rgba(244, 149, 234, 0.55) 0 50%, transparent 60%),
+		radial-gradient(8vw 8vw at 22% 82%, rgba(58, 208, 245, 0.45) 0 50%, transparent 60%);
+	animation: brand-blur-spin-ccw 75s linear infinite;
+}
+
+@keyframes brand-blur-spin-cw {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes brand-blur-spin-ccw {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
+}
