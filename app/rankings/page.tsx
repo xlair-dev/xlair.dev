@@ -11,10 +11,14 @@ import {
 } from "@/lib/rankings";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const DEFAULT_CATEGORY = rankingCategories[0];
 
+type RankingSearchParams = Record<string, string | string[] | undefined>;
+
 interface RankingsPageProps {
-	searchParams?: Record<string, string | string[] | undefined>;
+	searchParams?: RankingSearchParams | Promise<RankingSearchParams>;
 }
 
 interface FetchResult {
@@ -152,10 +156,9 @@ function RankingList({
 	);
 }
 
-export default async function RankingsPage({
-	searchParams,
-}: RankingsPageProps) {
+export default async function RankingsPage(props: RankingsPageProps) {
 	const apiBaseUrl = process.env.API_BASE_URL;
+	const searchParams = await props.searchParams;
 	const categoryParam = searchParams?.category;
 	const categoryId =
 		typeof categoryParam === "string" ? categoryParam : DEFAULT_CATEGORY.id;
