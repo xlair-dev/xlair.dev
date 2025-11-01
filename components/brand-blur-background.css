@@ -1,0 +1,118 @@
+/* Brand color blur background effect */
+.brand-blur-background {
+	position: relative;
+	overflow: hidden;
+}
+
+.brand-blur-layer {
+	position: absolute;
+	inset: -48px;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.brand-blur-orbit {
+	--brand-blur-radius: 18vw;
+	--brand-blur-size: 12vw;
+	--brand-blur-color: rgba(24, 172, 233, 0.55);
+	--brand-blur-duration: 60s;
+	--brand-blur-delay: 0s;
+	--brand-blur-origin-x: 50%;
+	--brand-blur-origin-y: 50%;
+	--brand-blur-angle: 0deg;
+	position: absolute;
+	top: var(--brand-blur-origin-y);
+	left: var(--brand-blur-origin-x);
+	width: 0;
+	height: 0;
+	animation: brand-blur-orbit-cw var(--brand-blur-duration) linear infinite;
+	animation-delay: var(--brand-blur-delay);
+	will-change: transform;
+}
+
+.brand-blur-orbit::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--brand-blur-size);
+	height: var(--brand-blur-size);
+	border-radius: 9999px;
+	background: radial-gradient(
+		circle at center,
+		var(--brand-blur-color) 0 30%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	transform: translateX(var(--brand-blur-radius)) translate(-50%, -50%);
+	filter: blur(calc(var(--brand-blur-size) * 0.3));
+	/* filter: blur(0%); */
+	opacity: 0.85;
+	will-change: transform;
+}
+
+.brand-blur-orbit--reverse {
+	animation-name: brand-blur-orbit-ccw;
+}
+
+.brand-blur-orbit--1 {
+	--brand-blur-radius: calc(10vw + 4vh);
+	--brand-blur-size: calc(50vw + 20vh);
+	--brand-blur-color: rgba(24, 172, 233, 0.45);
+	--brand-blur-duration: 10s;
+	--brand-blur-delay: 2.5s;
+	--brand-blur-origin-x: calc(110vw + 8vh);
+	--brand-blur-origin-y: calc(95vh + 40vw + 25vh);
+	--brand-blur-angle: 20deg;
+}
+
+.brand-blur-orbit--2 {
+	--brand-blur-radius: calc(8vw + 3.5vh);
+	--brand-blur-size: calc(40vw + 16vh);
+	--brand-blur-color: rgba(244, 149, 234, 0.45);
+	--brand-blur-duration: 7s;
+	--brand-blur-delay: 3.5s;
+	--brand-blur-origin-x: calc(-10vw - 8vh);
+	--brand-blur-origin-y: calc(95vh + 80vw + 40vh);
+	--brand-blur-angle: 40deg;
+}
+
+.brand-blur-orbit--3 {
+	--brand-blur-radius: calc(8vw + 3.5vh);
+	--brand-blur-size: calc(40vw + 16vh);
+	--brand-blur-color: rgba(244, 149, 234, 0.55);
+	--brand-blur-duration: 7s;
+	--brand-blur-delay: 5.625s;
+	--brand-blur-origin-x: calc(110vw + 8vh);
+	--brand-blur-origin-y: calc(95vh + 120vw + 55vh);
+	--brand-blur-angle: -30deg;
+}
+
+.brand-blur-orbit--4 {
+	--brand-blur-radius: calc(10vw + 4vh);
+	--brand-blur-size: calc(50vw + 20vh);
+	--brand-blur-color: rgba(58, 208, 245, 0.55);
+	--brand-blur-duration: 10s;
+	--brand-blur-delay: 0s;
+	--brand-blur-origin-x: calc(-10vw - 8vh);
+	--brand-blur-origin-y: calc(95vh + 160vw + 70vh);
+	--brand-blur-angle: -10deg;
+}
+
+@keyframes brand-blur-orbit-cw {
+	0% {
+		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) + 0deg));
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) + 360deg));
+	}
+}
+
+@keyframes brand-blur-orbit-ccw {
+	0% {
+		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) + 0deg));
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(calc(var(--brand-blur-angle) - 360deg));
+	}
+}
