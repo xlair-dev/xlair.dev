@@ -17,16 +17,12 @@ export default function BrandBlurBackground({
 		: "brand-blur-background";
 
 	const layerStyle: CSSProperties | undefined = offset
-		? { "--brand-blur-offset": offset } as CSSProperties
+		? ({ "--brand-blur-offset": offset } as CSSProperties)
 		: undefined;
 
 	return (
 		<div className={wrapperClassName}>
-			<div
-				className="brand-blur-layer"
-				style={layerStyle}
-				aria-hidden="true"
-			>
+			<div className="brand-blur-layer" style={layerStyle} aria-hidden="true">
 				<span className="brand-blur-orbit brand-blur-orbit--1" />
 				<span className="brand-blur-orbit brand-blur-orbit--2" />
 				<span className="brand-blur-orbit brand-blur-orbit--3 brand-blur-orbit--reverse" />
@@ -36,4 +32,3 @@ export default function BrandBlurBackground({
 		</div>
 	);
 }
-
