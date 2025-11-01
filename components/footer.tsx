@@ -66,7 +66,7 @@ export default function Footer() {
 							href="https://sohosai.com"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 						>
 							雙峰祭公式サイト
 						</a>
@@ -74,13 +74,13 @@ export default function Footer() {
 							href="https://search.sohosai.com/projects/6"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 						>
 							企画検索システム
 						</a>
 						<a
 							href="mailto:contact@xlair.dev"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="Email"
 						>
 							<FontAwesomeIcon
@@ -92,7 +92,7 @@ export default function Footer() {
 							href="https://x.com/xlair_project"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="X (Twitter)"
 						>
 							<FontAwesomeIcon
@@ -104,7 +104,7 @@ export default function Footer() {
 							href="https://github.com/xlair-dev"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="GitHub"
 						>
 							<FontAwesomeIcon
@@ -120,7 +120,7 @@ export default function Footer() {
 					<div className="flex items-center gap-4 justify-center">
 						<a
 							href="mailto:contact@xlair.dev"
-							className="text-gray-600 hover:text-brand-main transition-colors"
+							className="text-gray-600 hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="Email"
 						>
 							<FontAwesomeIcon
@@ -132,7 +132,7 @@ export default function Footer() {
 							href="https://x.com/xlair_project"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-gray-600 hover:text-brand-main transition-colors"
+							className="text-gray-600 hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="X (Twitter)"
 						>
 							<FontAwesomeIcon
@@ -144,7 +144,7 @@ export default function Footer() {
 							href="https://github.com/xlair-dev"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-gray-600 hover:text-brand-main transition-colors"
+							className="text-gray-600 hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="GitHub"
 						>
 							<FontAwesomeIcon
@@ -159,7 +159,7 @@ export default function Footer() {
 							href="https://sohosai.com"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 						>
 							雙峰祭公式サイト
 						</a>
@@ -167,7 +167,7 @@ export default function Footer() {
 							href="https://search.sohosai.com/projects/6"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="hover:text-brand-main transition-colors"
+							className="hover:text-brand-main transition-colors duration-400 ease-in-out"
 						>
 							企画検索システム
 						</a>
