@@ -61,12 +61,12 @@ export default function StatisticsSection({
 				雙峰祭にて公開中！
 			</p>
 			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-12 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
-			<StatisticsItem
-				label="総プレイ数"
-				// TODO: 以下を statistics.totalCredits に修正
-				value={statistics.totalUsers * 2}
-				unit="回"
-			/>
+				<StatisticsItem
+					label="総プレイ数"
+					// TODO: 以下を statistics.totalCredits に修正
+					value={statistics.totalUsers * 2}
+					unit="回"
+				/>
 				<StatisticsItem
 					label="総ユーザー数"
 					value={statistics.totalUsers}
