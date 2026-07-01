@@ -9,8 +9,9 @@
 	--color-brand-sub-light: #fdeafb;
 
 	/* Font family */
-	--font-family-sans: var(--font-jost), var(--font-noto-sans-jp), "Jost",
-		"Noto Sans JP", "Noto Sans", sans-serif;
+	--font-family-sans:
+		var(--font-jost), var(--font-noto-sans-jp), "Jost", "Noto Sans JP",
+		"Noto Sans", sans-serif;
 }
 
 .brand-border {
