@@ -1,8 +1,8 @@
 {
-  "extends": [
-    "config:recommended",
-    "docker:pinDigests",
-    "helpers:pinGitHubActionDigests",
-    ":maintainLockFilesWeekly"
-  ]
+	"extends": [
+		"config:recommended",
+		"docker:pinDigests",
+		"helpers:pinGitHubActionDigests",
+		":maintainLockFilesWeekly"
+	]
 }
