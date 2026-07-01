@@ -1,8 +1,8 @@
 "use client";
 
-import type { RankingCategoryOption } from "@/lib/rankings";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef } from "react";
+import type { RankingCategoryOption } from "@/lib/rankings";
 
 /**
  * Category selector dropdown for rankings page.

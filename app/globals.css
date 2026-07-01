@@ -9,8 +9,9 @@
 	--color-brand-sub-light: #fdeafb;
 
 	/* Font family */
-	--font-family-sans: var(--font-jost), var(--font-noto-sans-jp), "Jost",
-		"Noto Sans JP", "Noto Sans", sans-serif;
+	--font-family-sans:
+		var(--font-jost), var(--font-noto-sans-jp), "Jost", "Noto Sans JP",
+		"Noto Sans", sans-serif;
 }
 
 .brand-border {
@@ -19,7 +20,8 @@
 	--rb-color-3: #f495ea;
 	--rb-border-width: 5px;
 	border: double var(--rb-border-width) transparent;
-	background-image: linear-gradient(#ffffff, #ffffff),
+	background-image:
+		linear-gradient(#ffffff, #ffffff),
 		conic-gradient(
 			var(--rb-color-1) 0deg 40deg,
 			var(--rb-color-2) 40deg 80deg,
