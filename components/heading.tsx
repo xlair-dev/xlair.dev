@@ -1,6 +1,6 @@
+import type { ReactNode } from "react";
 import TopLeftTriangle from "@/components/top-left-triangle";
 import TopRightTriangle from "@/components/top-right-triangle";
-import type { ReactNode } from "react";
 
 interface HeadingProps {
 	/**

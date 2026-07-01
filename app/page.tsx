@@ -1,11 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
 import BrandBlurBackground from "@/components/brand-blur-background";
 import Footer from "@/components/footer";
 import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import StatisticsSection from "@/components/statistics-section";
-import Image from "next/image";
-import Link from "next/link";
 
 interface GlobalStatistics {
 	totalCredits: number;

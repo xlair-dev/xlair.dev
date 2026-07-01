@@ -1,3 +1,14 @@
+import {
+	findIconDefinition,
+	type IconDefinition,
+	type IconName,
+	library,
+} from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
 import BrandBlurBackground from "@/components/brand-blur-background";
 import { CategorySelector } from "@/components/category-selector";
 import Footer from "@/components/footer";
@@ -9,17 +20,6 @@ import {
 	rankingCategories,
 	toDisplayEntries,
 } from "@/lib/rankings";
-import {
-	type IconDefinition,
-	type IconName,
-	findIconDefinition,
-	library,
-} from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
-import Link from "next/link";
-import { Suspense } from "react";
 
 library.add(fas);
 
