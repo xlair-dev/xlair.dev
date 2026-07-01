@@ -4,5 +4,17 @@
 		"docker:pinDigests",
 		"helpers:pinGitHubActionDigests",
 		":maintainLockFilesWeekly"
+	],
+	"packageRules": [
+		{
+			"matchUpdateTypes": [
+				"minor",
+				"patch",
+				"pin",
+				"digest",
+				"lockFileMaintenance"
+			],
+			"automerge": true
+		}
 	]
 }
