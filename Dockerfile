@@ -1,5 +1,5 @@
 # Stage 1: Dependencies installation
-FROM node:24-alpine@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf AS deps
+FROM node:24-alpine@sha256:50c8e8ca1d27439048670df5883f32d57cf81cff6233222c893fd0d9884cbd81 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN corepack enable && corepack prepare pnpm@10 --activate
 RUN pnpm install --frozen-lockfile
 
 # Stage 2: Build
-FROM node:24-alpine@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf AS builder
+FROM node:24-alpine@sha256:50c8e8ca1d27439048670df5883f32d57cf81cff6233222c893fd0d9884cbd81 AS builder
 WORKDIR /app
 
 # Copy dependencies from deps stage
@@ -41,7 +41,7 @@ RUN corepack enable && corepack prepare pnpm@10 --activate
 RUN pnpm build
 
 # Stage 3: Production runtime
-FROM node:24-alpine@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf AS runner
+FROM node:24-alpine@sha256:50c8e8ca1d27439048670df5883f32d57cf81cff6233222c893fd0d9884cbd81 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
