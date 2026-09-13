@@ -1,0 +1,22 @@
+# Dependencies and generated output
+node_modules
+.next
+out
+build
+coverage
+
+# Repository metadata and local configuration
+.git
+.github
+.env
+.env.*
+!.env.dev.example
+!.env.prod.example
+
+# Local credentials and certificates
+*.pem
+
+# Local and debug files
+.DS_Store
+*.log
+*.tsbuildinfo
