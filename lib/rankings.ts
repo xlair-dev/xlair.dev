@@ -29,6 +29,18 @@ export interface RankingDisplayEntry {
 	value: number;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+	return typeof value === "object" && value !== null;
+}
+
+function isPositiveInteger(value: unknown): value is number {
+	return typeof value === "number" && Number.isInteger(value) && value > 0;
+}
+
+function isNonNegativeInteger(value: unknown): value is number {
+	return typeof value === "number" && Number.isInteger(value) && value >= 0;
+}
+
 export const rankingCategories: RankingCategoryOption[] = [
 	{
 		id: "total-score",
@@ -77,32 +89,21 @@ export function toDisplayEntries(
 	data: unknown,
 	valueKey: RankingValueKey,
 ): RankingDisplayEntry[] {
-	if (!data || typeof data !== "object" || data === null) {
+	if (!isRecord(data) || !Array.isArray(data.entries)) {
 		return [];
 	}
 
-	if (!("entries" in data)) {
-		return [];
-	}
-
-	const rawEntries = Array.isArray((data as { entries: unknown }).entries)
-		? (data as { entries: unknown[] }).entries.slice(0, 20)
-		: [];
-
-	return rawEntries.flatMap((item) => {
-		if (!item || typeof item !== "object") {
+	return data.entries.slice(0, 20).flatMap((item) => {
+		if (!isRecord(item)) {
 			return [];
 		}
 
-		const entry = item as Record<string, unknown>;
-		const rank = entry.rank;
-		const displayName = entry.displayName;
-		const value = entry[valueKey];
+		const { rank, displayName, [valueKey]: value } = item;
 
 		if (
-			typeof rank !== "number" ||
+			!isPositiveInteger(rank) ||
 			typeof displayName !== "string" ||
-			typeof value !== "number"
+			!isNonNegativeInteger(value)
 		) {
 			return [];
 		}

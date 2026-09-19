@@ -1,10 +1,4 @@
-import {
-	findIconDefinition,
-	type IconDefinition,
-	type IconName,
-	library,
-} from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,14 +8,13 @@ import { CategorySelector } from "@/components/category-selector";
 import Footer from "@/components/footer";
 import Heading from "@/components/heading";
 import ObiStrip from "@/components/obi-strip";
+import { fetchApi } from "@/lib/api";
 import {
 	type RankingCategoryOption,
 	type RankingDisplayEntry,
 	rankingCategories,
 	toDisplayEntries,
 } from "@/lib/rankings";
-
-library.add(fas);
 
 export const dynamic = "force-dynamic";
 
@@ -42,17 +35,6 @@ const ORDINAL_SUFFIX_MAP: Record<number, string> = {
 	1: "st",
 	2: "nd",
 	3: "rd",
-};
-
-// Helper object to get icon by prefix and name
-const byPrefixAndName = {
-	fas: new Proxy({} as Record<string, IconDefinition>, {
-		get: (_target, prop: string) =>
-			findIconDefinition({
-				prefix: "fas",
-				iconName: prop as IconName,
-			}) as IconDefinition,
-	}),
 };
 
 /**
@@ -79,17 +61,15 @@ function formatOrdinal(rank: number): string {
  */
 async function fetchRankingEntries(
 	category: RankingCategoryOption,
-	apiBaseUrl?: string,
 ): Promise<FetchResult> {
-	if (!apiBaseUrl) {
-		console.warn("API_BASE_URL is not set. Rankings will not be displayed.");
-		return { entries: [], error: "API の接続設定がされていません。" };
-	}
-
 	try {
-		const response = await fetch(`${apiBaseUrl}${category.endpoint}`, {
-			next: { revalidate: 10 },
-		});
+		const response = await fetchApi(category.endpoint);
+		if (!response) {
+			console.warn(
+				"API_BASE_URL is not configured correctly. Rankings will not be displayed.",
+			);
+			return { entries: [], error: "API の接続設定がされていません。" };
+		}
 
 		if (!response.ok) {
 			console.error(
@@ -211,7 +191,6 @@ function RankingList({
 }
 
 export default async function RankingsPage(props: RankingsPageProps) {
-	const apiBaseUrl = process.env.API_BASE_URL;
 	const searchParams = await props.searchParams;
 	const categoryParam = searchParams?.category;
 	const categoryId =
@@ -220,10 +199,7 @@ export default async function RankingsPage(props: RankingsPageProps) {
 		rankingCategories.find((category) => category.id === categoryId) ??
 		DEFAULT_CATEGORY;
 
-	const { entries, error } = await fetchRankingEntries(
-		selectedCategory,
-		apiBaseUrl,
-	);
+	const { entries, error } = await fetchRankingEntries(selectedCategory);
 
 	return (
 		<BrandBlurBackground offset="50vh">
@@ -240,7 +216,7 @@ export default async function RankingsPage(props: RankingsPageProps) {
 				aria-label="トップページに戻る"
 			>
 				<FontAwesomeIcon
-					icon={byPrefixAndName.fas["arrow-left"]}
+					icon={faArrowLeft}
 					className="text-base sm:text-lg md:text-xl lg:text-2xl"
 				/>
 			</Link>

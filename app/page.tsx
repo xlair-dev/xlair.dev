@@ -6,12 +6,8 @@ import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import StatisticsSection from "@/components/statistics-section";
-
-interface GlobalStatistics {
-	totalCredits: number;
-	totalUsers: number;
-	totalScore: number;
-}
+import { fetchApi } from "@/lib/api";
+import { type GlobalStatistics, parseGlobalStatistics } from "@/lib/statistics";
 
 /**
  * Fetches global statistics from the API server.
@@ -19,18 +15,14 @@ interface GlobalStatistics {
  * @requires API_BASE_URL - Base URL of the API server
  */
 async function fetchStatistics(): Promise<GlobalStatistics | null> {
-	const apiBaseUrl = process.env.API_BASE_URL;
-
-	if (!apiBaseUrl) {
-		console.warn("API_BASE_URL is not set. Statistics will not be displayed.");
-		return null;
-	}
-
 	try {
-		const response = await fetch(`${apiBaseUrl}/statistics/summary`, {
-			// Revalidate every 60 seconds
-			next: { revalidate: 5 },
-		});
+		const response = await fetchApi("/statistics/summary", 5);
+		if (!response) {
+			console.warn(
+				"API_BASE_URL is not configured correctly. Statistics will not be displayed.",
+			);
+			return null;
+		}
 
 		if (!response.ok) {
 			console.error(
@@ -39,7 +31,13 @@ async function fetchStatistics(): Promise<GlobalStatistics | null> {
 			return null;
 		}
 
-		return await response.json();
+		const statistics = parseGlobalStatistics(await response.json());
+		if (!statistics) {
+			console.error("Statistics response does not match the API contract.");
+			return null;
+		}
+
+		return statistics;
 	} catch (error) {
 		console.error("Error fetching statistics:", error);
 		return null;
