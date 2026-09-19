@@ -23,7 +23,7 @@ export default function Footer() {
 							className="w-32 sm:w-40 md:w-48 h-auto"
 						/>
 						<p className="text-gray-600 text-sm sm:text-base">
-							© 2025 XLAIR Project ALL rights reserved.
+							© XLAIR Project ALL rights reserved.
 						</p>
 					</div>
 					{/* Right side */}
@@ -139,7 +139,7 @@ export default function Footer() {
 							className="w-24 h-auto"
 						/>
 						<p className="text-gray-600 text-xs">
-							© 2025 XLAIR Project ALL rights reserved.
+							© XLAIR Project ALL rights reserved.
 						</p>
 					</div>
 				</div>
