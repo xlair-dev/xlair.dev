@@ -37,25 +37,18 @@ const ORDINAL_SUFFIX_MAP: Record<number, string> = {
 	3: "rd",
 };
 
-/**
- * Formats rank numbers into ordinal strings (e.g., "1st", "2nd").
- * @param rank - Rank value
- * @returns Ordinal-formatted rank
- */
-function formatOrdinal(rank: number): string {
+function getOrdinalSuffix(rank: number): string {
 	const remainder = rank % 100;
 	if (remainder >= 11 && remainder <= 13) {
-		return `${rank}th`;
+		return "th";
 	}
 
-	const suffix = ORDINAL_SUFFIX_MAP[rank % 10] ?? "th";
-	return `${rank}${suffix}`;
+	return ORDINAL_SUFFIX_MAP[rank % 10] ?? "th";
 }
 
 /**
  * Fetches ranking entries for the specified category.
  * @param category - Target ranking category
- * @param apiBaseUrl - Base URL of the API server
  * @returns Ranking entries and optional error message
  * @requires API_BASE_URL - Base URL of the API server
  */
@@ -166,7 +159,7 @@ function RankingList({
 								{entry.rank}
 							</span>
 							<span className="text-lg sm:text-2xl md:text-3xl">
-								{formatOrdinal(entry.rank).replace(/\d+/, "")}
+								{getOrdinalSuffix(entry.rank)}
 							</span>
 						</span>
 					</div>
