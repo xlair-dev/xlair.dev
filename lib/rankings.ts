@@ -1,14 +1,4 @@
-/**
- * Sheet ID for the song "AXCEL³".
- * Retrieved from environment variable TMP_AXCEL3_SHEET_ID.
- */
-export const SHEET_AXCEL3_ID = process.env.TMP_AXCEL3_SHEET_ID?.trim();
-
-/**
- * Sheet ID for the song "Everything".
- * Retrieved from environment variable TMP_EVERYTHING_SHEET_ID.
- */
-export const SHEET_EVERYTHING_ID = process.env.TMP_EVERYTHING_SHEET_ID?.trim();
+import { getMusicCatalog, type SyncedMusic } from "@/lib/music";
 
 export type RankingValueKey = "score" | "totalScore" | "rating" | "xp";
 
@@ -41,54 +31,48 @@ function isNonNegativeInteger(value: unknown): value is number {
 	return typeof value === "number" && Number.isInteger(value) && value >= 0;
 }
 
-const sheetRankingCategories = [
-	{
-		id: "sheet-axcel3",
-		label: "「AXCEL³」MASTER のハイスコア",
-		sheetId: SHEET_AXCEL3_ID,
-	},
-	{
-		id: "sheet-everything",
-		label: "「Everything」MASTER のハイスコア",
-		sheetId: SHEET_EVERYTHING_ID,
-	},
-].flatMap(({ sheetId, ...category }) =>
-	sheetId
-		? [
-				{
-					...category,
-					endpoint: `/rankings/sheets/${encodeURIComponent(sheetId)}`,
+function sheetRankingCategories(musicCatalog: readonly SyncedMusic[]) {
+	return musicCatalog
+		.filter((music) => !music.isTest)
+		.flatMap((music) =>
+			music.sheets
+				.filter((sheet) => sheet.difficulty === "master")
+				.map((sheet) => ({
+					id: `sheet-${sheet.id}`,
+					label: `「${music.title}」MASTER のハイスコア`,
+					endpoint: `/rankings/sheets/${encodeURIComponent(sheet.id)}`,
 					valueKey: "score" as const,
 					valueLabel: "ハイスコア",
-				},
-			]
-		: [],
-);
+				})),
+		);
+}
 
-export const rankingCategories: RankingCategoryOption[] = [
-	{
-		id: "total-score",
-		label: "総計ハイスコア",
-		endpoint: "/rankings/total-score",
-		valueKey: "totalScore",
-		valueLabel: "総計ハイスコア",
-	},
-	...sheetRankingCategories,
-	{
-		id: "rating",
-		label: "レーティング",
-		endpoint: "/rankings/rating",
-		valueKey: "rating",
-		valueLabel: "レーティング",
-	},
-	{
-		id: "xp",
-		label: "XP",
-		endpoint: "/rankings/xp",
-		valueKey: "xp",
-		valueLabel: "XP",
-	},
-];
+export function getRankingCategories(): RankingCategoryOption[] {
+	return [
+		{
+			id: "total-score",
+			label: "総計ハイスコア",
+			endpoint: "/rankings/total-score",
+			valueKey: "totalScore",
+			valueLabel: "総計ハイスコア",
+		},
+		...sheetRankingCategories(getMusicCatalog()),
+		{
+			id: "rating",
+			label: "レーティング",
+			endpoint: "/rankings/rating",
+			valueKey: "rating",
+			valueLabel: "レーティング",
+		},
+		{
+			id: "xp",
+			label: "XP",
+			endpoint: "/rankings/xp",
+			valueKey: "xp",
+			valueLabel: "XP",
+		},
+	];
+}
 
 /**
  * Converts API responses into ranking entries used by the UI.
