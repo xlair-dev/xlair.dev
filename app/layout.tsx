@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Jost, Noto_Sans_JP } from "next/font/google";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { eventDescription, eventInformation } from "@/lib/event";
 import "./globals.css";
 
 config.autoAddCss = false;
@@ -28,8 +29,7 @@ export const metadata: Metadata = {
 		default: "音ゲー「XLAIR」公式 Webサイト",
 		template: "%s | XLAIR",
 	},
-	description:
-		"新作音ゲーム「XLAIR」を、筑波大学 雙峰祭2025 にて展示します。XLAIR は、画面に表示されるノーツに合わせてスライダーをなぞったりボタンを押したりすることで楽曲を演奏する、リズムアクション型の音楽ゲームです。当日はぜひ 2D304 にお越しください！",
+	description: eventDescription,
 	keywords: [
 		"XLAIR",
 		"音ゲー",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 		"音楽ゲーム",
 		"筑波大学",
 		"雙峰祭",
-		"雙峰祭2025",
+		`${eventInformation.name}${eventInformation.year}`,
 		"リズムアクション",
 		"音ゲーム",
 		"ゲーム",
@@ -67,8 +67,7 @@ export const metadata: Metadata = {
 		url: siteUrl,
 		siteName: "XLAIR",
 		title: "音ゲー「XLAIR」公式 Webサイト",
-		description:
-			"新作音ゲーム「XLAIR」を、筑波大学 雙峰祭2025 にて展示します。XLAIR は、画面に表示されるノーツに合わせてスライダーをなぞったりボタンを押したりすることで楽曲を演奏する、リズムアクション型の音楽ゲームです。当日はぜひ 2D304 にお越しください！",
+		description: eventDescription,
 		images: [
 			{
 				url: "/og.png",
@@ -81,8 +80,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title: "音ゲー「XLAIR」公式 Webサイト",
-		description:
-			"新作音ゲーム「XLAIR」を、筑波大学 雙峰祭2025 にて展示します。リズムアクション型の音楽ゲームです。",
+		description: eventDescription,
 		images: ["/og.png"],
 	},
 	formatDetection: {

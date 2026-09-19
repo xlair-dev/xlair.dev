@@ -7,6 +7,7 @@ import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import StatisticsSection from "@/components/statistics-section";
 import { fetchApi } from "@/lib/api";
+import { eventInformation } from "@/lib/event";
 import { type GlobalStatistics, parseGlobalStatistics } from "@/lib/statistics";
 
 /**
@@ -86,12 +87,12 @@ export default async function Home() {
 				/>
 				<div className="text-brand-main font-medium mt-4 sm:mt-6 flex flex-col item-end sm:flex-row items-center gap-0 sm:gap-2 md:gap-3">
 					<div className="flex flex-row items-center text-4xl sm:text-4xl md:text-4xl lg:text-5xl">
-						<p>11.02</p>
+						<p>{eventInformation.startDate}</p>
 						<NavigationArrow className="text-brand-main-light w-8 h-8 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 translate-y-1" />
-						<p>11.03</p>
+						<p>{eventInformation.endDate}</p>
 					</div>
 					<div className="flex flex-row items-end text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-						<p>雙峰祭</p>
+						<p>{eventInformation.name}</p>
 						<p className="text-xl sm:text-xl md:text-2l lg:text-3xl">にて</p>
 						<p>公開中</p>
 					</div>
@@ -132,16 +133,18 @@ export default async function Home() {
 					<Heading>INFO</Heading>
 					<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 px-12 sm:px-16 md:px-20 lg:px-24 py-8 sm:py-20 md:py-24 lg:py-28">
 						<div className="flex flex-row items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-600 font-medium">
-							<p>11.02</p>
+							<p>{eventInformation.startDate}</p>
 							<NavigationArrow className="text-brand-main-light w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 translate-y-1" />
-							<p>11.03</p>
+							<p>{eventInformation.endDate}</p>
 						</div>
 						<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
-							筑波大学 2D304 教室
+							{eventInformation.venue}
 						</p>
 						<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
 							<span className="text-gray-600">1PLAY</span>{" "}
-							<span className="text-brand-main">¥100</span>
+							<span className="text-brand-main">
+								¥{eventInformation.playPrice}
+							</span>
 						</p>
 					</div>
 				</div>
