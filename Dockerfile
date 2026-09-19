@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml* ./
 
 # Install pnpm and dependencies
-RUN corepack enable && corepack prepare pnpm@10 --activate
+RUN corepack enable && corepack prepare pnpm@12.0.0 --activate
 RUN pnpm install --frozen-lockfile
 
 # Stage 2: Build
@@ -37,7 +37,7 @@ ENV TMP_EVERYTHING_SHEET_ID=$TMP_EVERYTHING_SHEET_ID
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build the application
-RUN corepack enable && corepack prepare pnpm@10 --activate
+RUN corepack enable && corepack prepare pnpm@12.0.0 --activate
 RUN pnpm build
 
 # Stage 3: Production runtime
