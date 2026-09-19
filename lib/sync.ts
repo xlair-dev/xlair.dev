@@ -36,7 +36,9 @@ async function fetchM2MToken(): Promise<string> {
 	});
 
 	if (!response.ok) {
-		throw new Error(`Auth0 token request failed with status ${response.status}.`);
+		throw new Error(
+			`Auth0 token request failed with status ${response.status}.`,
+		);
 	}
 
 	const token = (await response.json()) as Partial<TokenResponse>;
@@ -46,7 +48,9 @@ async function fetchM2MToken(): Promise<string> {
 		!Number.isFinite(token.expires_in) ||
 		token.expires_in <= 0
 	) {
-		throw new Error("Auth0 token response does not match the expected contract.");
+		throw new Error(
+			"Auth0 token response does not match the expected contract.",
+		);
 	}
 
 	cachedToken = {
@@ -75,12 +79,16 @@ export async function synchronizeMusicCatalog(): Promise<SyncedMusic[]> {
 		cache: "no-store",
 	});
 	if (!response.ok) {
-		throw new Error(`Music synchronization failed with status ${response.status}.`);
+		throw new Error(
+			`Music synchronization failed with status ${response.status}.`,
+		);
 	}
 
 	const catalog = parseMusicCatalog(await response.json());
 	if (!catalog) {
-		throw new Error("Music synchronization response does not match the API contract.");
+		throw new Error(
+			"Music synchronization response does not match the API contract.",
+		);
 	}
 
 	return catalog;

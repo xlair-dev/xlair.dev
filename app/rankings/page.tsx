@@ -10,9 +10,9 @@ import Heading from "@/components/heading";
 import ObiStrip from "@/components/obi-strip";
 import { fetchApi } from "@/lib/api";
 import {
+	getRankingCategories,
 	type RankingCategoryOption,
 	type RankingDisplayEntry,
-	getRankingCategories,
 	toDisplayEntries,
 } from "@/lib/rankings";
 
