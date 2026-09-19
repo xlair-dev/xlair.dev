@@ -1,10 +1,10 @@
 export const eventInformation = {
 	name: "雙峰祭",
-	year: 2026,
-	startDate: "10.31",
-	endDate: "11.01",
-	venue: null,
-	playPrice: null,
+	year: 2025,
+	startDate: "11.02",
+	endDate: "11.03",
+	venue: "筑波大学 2D304 教室",
+	playPrice: 100,
 } as const;
 
-export const eventDescription = `XLAIR は、画面に表示されるノーツに合わせてスライダーをなぞったりボタンを押したりする、リズムアクション型の音楽ゲームです。${eventInformation.name}${eventInformation.year} に向けて開発しています。`;
+export const eventDescription = `新作音ゲーム「XLAIR」を、筑波大学 ${eventInformation.name}${eventInformation.year} にて展示します。XLAIR は、画面に表示されるノーツに合わせてスライダーをなぞったりボタンを押したりすることで楽曲を演奏する、リズムアクション型の音楽ゲームです。当日はぜひ ${eventInformation.venue} にお越しください！`;
