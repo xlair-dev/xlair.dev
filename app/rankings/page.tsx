@@ -12,13 +12,11 @@ import { fetchApi } from "@/lib/api";
 import {
 	type RankingCategoryOption,
 	type RankingDisplayEntry,
-	rankingCategories,
+	getRankingCategories,
 	toDisplayEntries,
 } from "@/lib/rankings";
 
 export const dynamic = "force-dynamic";
-
-const DEFAULT_CATEGORY = rankingCategories[0];
 
 type RankingSearchParams = Record<string, string | string[] | undefined>;
 
@@ -184,13 +182,15 @@ function RankingList({
 }
 
 export default async function RankingsPage(props: RankingsPageProps) {
+	const rankingCategories = getRankingCategories();
+	const defaultCategory = rankingCategories[0];
 	const searchParams = await props.searchParams;
 	const categoryParam = searchParams?.category;
 	const categoryId =
-		typeof categoryParam === "string" ? categoryParam : DEFAULT_CATEGORY.id;
+		typeof categoryParam === "string" ? categoryParam : defaultCategory.id;
 	const selectedCategory =
 		rankingCategories.find((category) => category.id === categoryId) ??
-		DEFAULT_CATEGORY;
+		defaultCategory;
 
 	const { entries, error } = await fetchRankingEntries(selectedCategory);
 

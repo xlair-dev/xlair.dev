@@ -28,8 +28,12 @@ cp .env.dev.example .env
 | --- | --- |
 | `SITE_URL` | サイトの公開 URL |
 | `API_BASE_URL` | server の API URL |
-| `TMP_AXCEL3_SHEET_ID` | `AXCEL³` の譜面 ID |
-| `TMP_EVERYTHING_SHEET_ID` | `Everything` の譜面 ID |
+| `AUTH0_ISSUER` | Auth0 の issuer URL |
+| `AUTH0_AUDIENCE` | server が発行する API の audience |
+| `AUTH0_M2M_CLIENT_ID` | web 用 M2M Application の Client ID |
+| `AUTH0_M2M_CLIENT_SECRET` | web 用 M2M Application の Client Secret |
+
+Next.js サーバーは起動時に Auth0 の client-credentials grant で `/sync` を呼び出し、server が管理する曲一覧をメモリへ同期します。M2M の client secret はブラウザへ公開せず、実行時環境変数だけに設定してください。
 
 ### コマンド
 
