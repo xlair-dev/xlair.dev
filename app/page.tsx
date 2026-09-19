@@ -93,8 +93,8 @@ export default async function Home() {
 					</div>
 					<div className="flex flex-row items-end text-xl sm:text-2xl md:text-3xl lg:text-4xl">
 						<p>{eventInformation.name}</p>
-						<p className="text-xl md:text-2xl lg:text-3xl">にて</p>
-						<p>公開中</p>
+						<p className="text-xl md:text-2xl lg:text-3xl">に向けて</p>
+						<p>開発中</p>
 					</div>
 				</div>
 			</main>
@@ -137,15 +137,19 @@ export default async function Home() {
 							<NavigationArrow className="text-brand-main-light w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 translate-y-1" />
 							<p>{eventInformation.endDate}</p>
 						</div>
-						<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
-							{eventInformation.venue}
-						</p>
-						<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
-							<span className="text-gray-600">1PLAY</span>{" "}
-							<span className="text-brand-main">
-								¥{eventInformation.playPrice}
-							</span>
-						</p>
+						{eventInformation.venue && (
+							<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
+								{eventInformation.venue}
+							</p>
+						)}
+						{eventInformation.playPrice !== null && (
+							<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
+								<span className="text-gray-600">1PLAY</span>{" "}
+								<span className="text-brand-main">
+									¥{eventInformation.playPrice}
+								</span>
+							</p>
+						)}
 					</div>
 				</div>
 			</div>
