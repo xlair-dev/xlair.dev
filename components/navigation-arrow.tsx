@@ -1,12 +1,13 @@
 import type { ComponentPropsWithoutRef } from "react";
+import { getSquareSizeProps, type SvgIconSize } from "@/components/icon-size";
 
 interface NavigationArrowProps
 	extends Omit<ComponentPropsWithoutRef<"svg">, "viewBox"> {
 	/**
-	 * Size of the arrow icon in pixels or Tailwind size class
+	 * Size of the arrow icon in CSS units or pixels
 	 * @default "1em"
 	 */
-	size?: string | number;
+	size?: SvgIconSize;
 }
 
 /**
@@ -18,12 +19,7 @@ export default function NavigationArrow({
 	className = "",
 	...props
 }: NavigationArrowProps) {
-	const sizeValue = size
-		? typeof size === "number"
-			? `${size}px`
-			: size
-		: undefined;
-	const sizeProps = sizeValue ? { width: sizeValue, height: sizeValue } : {};
+	const sizeProps = getSquareSizeProps(size);
 
 	return (
 		<svg
