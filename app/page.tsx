@@ -85,7 +85,7 @@ export default async function Home() {
 					className="w-[90vw] sm:w-[80vw] h-auto max-w-[1080px]"
 					priority
 				/>
-				<div className="text-brand-main font-medium mt-4 sm:mt-6 flex flex-col item-end sm:flex-row items-center gap-0 sm:gap-2 md:gap-3">
+				<div className="text-brand-main font-medium mt-4 sm:mt-6 flex flex-col sm:flex-row items-center gap-0 sm:gap-2 md:gap-3">
 					<div className="flex flex-row items-center text-4xl sm:text-4xl md:text-4xl lg:text-5xl">
 						<p>{eventInformation.startDate}</p>
 						<NavigationArrow className="text-brand-main-light w-8 h-8 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 translate-y-1" />
@@ -93,7 +93,7 @@ export default async function Home() {
 					</div>
 					<div className="flex flex-row items-end text-xl sm:text-2xl md:text-3xl lg:text-4xl">
 						<p>{eventInformation.name}</p>
-						<p className="text-xl sm:text-xl md:text-2l lg:text-3xl">にて</p>
+						<p className="text-xl md:text-2xl lg:text-3xl">にて</p>
 						<p>公開中</p>
 					</div>
 				</div>
