@@ -1,41 +1,7 @@
-import {
-	findIconDefinition,
-	type IconDefinition,
-	type IconName,
-	library,
-} from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-
-library.add(fas, far, fab);
-
-// Helper object to get icon by prefix and name
-const byPrefixAndName = {
-	far: new Proxy({} as Record<string, IconDefinition>, {
-		get: (_target, prop: string) =>
-			findIconDefinition({
-				prefix: "far",
-				iconName: prop as IconName,
-			}) as IconDefinition,
-	}),
-	fab: new Proxy({} as Record<string, IconDefinition>, {
-		get: (_target, prop: string) =>
-			findIconDefinition({
-				prefix: "fab",
-				iconName: prop as IconName,
-			}) as IconDefinition,
-	}),
-	fas: new Proxy({} as Record<string, IconDefinition>, {
-		get: (_target, prop: string) =>
-			findIconDefinition({
-				prefix: "fas",
-				iconName: prop as IconName,
-			}) as IconDefinition,
-	}),
-};
 
 /**
  * Footer component with logo, copyright, links, and social media icons.
@@ -84,7 +50,7 @@ export default function Footer() {
 							aria-label="Email"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.far.envelope}
+								icon={faEnvelope}
 								className="text-xl sm:text-2xl md:text-3xl"
 							/>
 						</a>
@@ -96,7 +62,7 @@ export default function Footer() {
 							aria-label="X (Twitter)"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.fab["x-twitter"]}
+								icon={faXTwitter}
 								className="text-xl sm:text-2xl md:text-3xl"
 							/>
 						</a>
@@ -108,7 +74,7 @@ export default function Footer() {
 							aria-label="GitHub"
 						>
 							<FontAwesomeIcon
-								icon={byPrefixAndName.fab.github}
+								icon={faGithub}
 								className="text-xl sm:text-2xl md:text-3xl"
 							/>
 						</a>
@@ -123,10 +89,7 @@ export default function Footer() {
 							className="text-gray-600 hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="Email"
 						>
-							<FontAwesomeIcon
-								icon={byPrefixAndName.far.envelope}
-								className="text-xl"
-							/>
+							<FontAwesomeIcon icon={faEnvelope} className="text-xl" />
 						</a>
 						<a
 							href="https://x.com/xlair_project"
@@ -135,10 +98,7 @@ export default function Footer() {
 							className="text-gray-600 hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="X (Twitter)"
 						>
-							<FontAwesomeIcon
-								icon={byPrefixAndName.fab["x-twitter"]}
-								className="text-xl"
-							/>
+							<FontAwesomeIcon icon={faXTwitter} className="text-xl" />
 						</a>
 						<a
 							href="https://github.com/xlair-dev"
@@ -147,10 +107,7 @@ export default function Footer() {
 							className="text-gray-600 hover:text-brand-main transition-colors duration-400 ease-in-out"
 							aria-label="GitHub"
 						>
-							<FontAwesomeIcon
-								icon={byPrefixAndName.fab.github}
-								className="text-xl"
-							/>
+							<FontAwesomeIcon icon={faGithub} className="text-xl" />
 						</a>
 					</div>
 					{/* Links */}
