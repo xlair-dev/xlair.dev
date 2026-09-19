@@ -1,12 +1,13 @@
 import type { ComponentPropsWithoutRef } from "react";
+import { getSquareSizeProps, type SvgIconSize } from "@/components/icon-size";
 
 interface TopRightTriangleProps
 	extends Omit<ComponentPropsWithoutRef<"svg">, "viewBox"> {
 	/**
-	 * Size of the triangle icon in pixels or Tailwind size class
+	 * Size of the triangle icon in CSS units or pixels
 	 * @default "1em"
 	 */
-	size?: string | number;
+	size?: SvgIconSize;
 }
 
 /**
@@ -19,12 +20,7 @@ export default function TopRightTriangle({
 	className = "",
 	...props
 }: TopRightTriangleProps) {
-	const sizeValue = size
-		? typeof size === "number"
-			? `${size}px`
-			: size
-		: undefined;
-	const sizeProps = sizeValue ? { width: sizeValue, height: sizeValue } : {};
+	const sizeProps = getSquareSizeProps(size);
 
 	return (
 		<svg
