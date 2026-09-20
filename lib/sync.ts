@@ -7,6 +7,8 @@ interface TokenResponse {
 }
 
 let cachedToken: { value: string; expiresAt: number } | undefined;
+let cachedMusicCatalog: readonly SyncedMusic[] | undefined;
+let synchronization: Promise<readonly SyncedMusic[]> | undefined;
 
 function requiredEnvironmentVariable(name: string): string {
 	const value = process.env[name]?.trim();
@@ -69,6 +71,37 @@ async function fetchM2MToken(): Promise<string> {
  * @requires AUTH0_M2M_CLIENT_SECRET - Client secret for the web M2M application
  */
 export async function synchronizeMusicCatalog(): Promise<SyncedMusic[]> {
+	if (cachedMusicCatalog) {
+		return [...cachedMusicCatalog];
+	}
+
+	if (!synchronization) {
+		synchronization = fetchMusicCatalog()
+			.then((catalog) => {
+				cachedMusicCatalog = catalog;
+				return catalog;
+			})
+			.finally(() => {
+				synchronization = undefined;
+			});
+	}
+
+	return [...(await synchronization)];
+}
+
+/**
+ * Returns the server-owned music catalog, synchronizing it when this server context has not loaded it yet.
+ * @requires API_BASE_URL - Absolute HTTP(S) URL of the API server
+ * @requires AUTH0_AUDIENCE - Auth0 API audience accepted by server
+ * @requires AUTH0_ISSUER - Auth0 tenant issuer URL
+ * @requires AUTH0_M2M_CLIENT_ID - Client ID for the web M2M application
+ * @requires AUTH0_M2M_CLIENT_SECRET - Client secret for the web M2M application
+ */
+export async function getMusicCatalog(): Promise<readonly SyncedMusic[]> {
+	return synchronizeMusicCatalog();
+}
+
+async function fetchMusicCatalog(): Promise<SyncedMusic[]> {
 	const url = resolveApiUrl("/sync");
 	if (!url) {
 		throw new Error("API_BASE_URL must be configured with an HTTP(S) URL.");

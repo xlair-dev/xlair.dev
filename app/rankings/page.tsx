@@ -182,7 +182,7 @@ function RankingList({
 }
 
 export default async function RankingsPage(props: RankingsPageProps) {
-	const rankingCategories = getRankingCategories();
+	const rankingCategories = await getRankingCategories();
 	const defaultCategory = rankingCategories[0];
 	const searchParams = await props.searchParams;
 	const categoryParam = searchParams?.category;

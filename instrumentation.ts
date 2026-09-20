@@ -3,9 +3,6 @@ export async function register(): Promise<void> {
 		return;
 	}
 
-	const [{ setMusicCatalog }, { synchronizeMusicCatalog }] = await Promise.all([
-		import("@/lib/music"),
-		import("@/lib/sync"),
-	]);
-	setMusicCatalog(await synchronizeMusicCatalog());
+	const { synchronizeMusicCatalog } = await import("@/lib/sync");
+	await synchronizeMusicCatalog();
 }

@@ -1,4 +1,5 @@
-import { getMusicCatalog, type SyncedMusic } from "@/lib/music";
+import type { SyncedMusic } from "@/lib/music";
+import { getMusicCatalog } from "@/lib/sync";
 
 export type RankingValueKey = "score" | "totalScore" | "rating" | "xp";
 
@@ -47,7 +48,9 @@ function sheetRankingCategories(musicCatalog: readonly SyncedMusic[]) {
 		);
 }
 
-export function getRankingCategories(): RankingCategoryOption[] {
+export async function getRankingCategories(): Promise<RankingCategoryOption[]> {
+	const musicCatalog = await getMusicCatalog();
+
 	return [
 		{
 			id: "total-score",
@@ -56,7 +59,7 @@ export function getRankingCategories(): RankingCategoryOption[] {
 			valueKey: "totalScore",
 			valueLabel: "総計ハイスコア",
 		},
-		...sheetRankingCategories(getMusicCatalog()),
+		...sheetRankingCategories(musicCatalog),
 		{
 			id: "rating",
 			label: "レーティング",
