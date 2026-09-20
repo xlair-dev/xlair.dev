@@ -17,20 +17,6 @@ export interface SyncedMusic {
 	sheets: readonly SyncedSheet[];
 }
 
-let musicCatalog: readonly SyncedMusic[] | undefined;
-
-export function setMusicCatalog(catalog: readonly SyncedMusic[]): void {
-	musicCatalog = catalog;
-}
-
-export function getMusicCatalog(): readonly SyncedMusic[] {
-	if (!musicCatalog) {
-		throw new Error("Music catalog has not been synchronized.");
-	}
-
-	return musicCatalog;
-}
-
 function isRecord(value: unknown): value is Record<string, unknown> {
 	return typeof value === "object" && value !== null;
 }
