@@ -22,7 +22,7 @@ interface StatisticsItemProps {
 function StatisticsItem({ label, value, unit }: StatisticsItemProps) {
 	return (
 		<div className="flex flex-col items-center gap-2 sm:gap-3 md:gap-4">
-			<p className="text-brand-main text-sm sm:text-lg md:text-xl lg:text-2xl font-medium">
+			<p className="text-brand-main text-sm sm:text-lg md:text-xl lg:text-2xl font-medium whitespace-nowrap">
 				{label}
 			</p>
 			<div className="flex items-baseline gap-1 sm:gap-2">
@@ -54,7 +54,7 @@ export default function StatisticsSection({
 				{eventInformation.name}
 				{eventPhaseText[eventPhase].statistics}
 			</p>
-			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-8 md:gap-10 lg:gap-12 px-10 sm:px-10 md:px-14 lg:px-18 pt-4 sm:pt-8 md:pt-12 lg:pt-16 pb-10 sm:pb-14 md:pb-18 lg:pb-22">
+			<div className="brand-border rounded-4xl sm:rounded-full w-[calc(90vw+24px)] max-w-xl sm:max-w-2xl md:max-w-5xl lg:max-w-6xl flex flex-col items-center justify-center gap-2 sm:gap-6 md:gap-8 lg:gap-10 px-12 sm:px-12 md:px-16 lg:px-20 pt-2 sm:pt-6 md:pt-10 lg:pt-14 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
 				<p className="text-brand-main text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium">
 					2025年・2026年 総計
 				</p>
