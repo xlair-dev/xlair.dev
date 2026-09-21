@@ -54,7 +54,7 @@ export default function StatisticsSection({
 				{eventInformation.name}
 				{eventPhaseText[eventPhase].statistics}
 			</p>
-			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-12 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
+			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-8 md:gap-10 lg:gap-12 px-10 sm:px-10 md:px-14 lg:px-18 pt-4 sm:pt-8 md:pt-12 lg:pt-16 pb-10 sm:pb-14 md:pb-18 lg:pb-22">
 				<p className="text-brand-main text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium">
 					2025年・2026年 総計
 				</p>
