@@ -7,8 +7,10 @@ import NavigationArrow from "@/components/navigation-arrow";
 import ObiStrip from "@/components/obi-strip";
 import StatisticsSection from "@/components/statistics-section";
 import { fetchApi } from "@/lib/api";
-import { eventInformation } from "@/lib/event";
+import { eventInformation, eventPhaseText, getEventPhase } from "@/lib/event";
 import { type GlobalStatistics, parseGlobalStatistics } from "@/lib/statistics";
+
+export const revalidate = 60;
 
 /**
  * Fetches global statistics from the API server.
@@ -47,6 +49,8 @@ async function fetchStatistics(): Promise<GlobalStatistics | null> {
 
 export default async function Home() {
 	const statistics = await fetchStatistics();
+	const eventPhase = getEventPhase();
+	const phaseText = eventPhaseText[eventPhase];
 	return (
 		<BrandBlurBackground offset="95vh">
 			<ObiStrip
@@ -93,8 +97,10 @@ export default async function Home() {
 					</div>
 					<div className="flex flex-row items-end text-xl sm:text-2xl md:text-3xl lg:text-4xl">
 						<p>{eventInformation.name}</p>
-						<p className="text-xl md:text-2xl lg:text-3xl">にて</p>
-						<p>公開中</p>
+						<p className="text-xl md:text-2xl lg:text-3xl">
+							{phaseText.topConnector}
+						</p>
+						<p>{phaseText.topStatus}</p>
 					</div>
 				</div>
 			</main>
