@@ -54,22 +54,27 @@ export default function StatisticsSection({
 				{eventInformation.name}
 				{eventPhaseText[eventPhase].statistics}
 			</p>
-			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-12 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
-				<StatisticsItem
-					label="総プレイ数"
-					value={statistics.totalCredits}
-					unit="回"
-				/>
-				<StatisticsItem
-					label="総ユーザー数"
-					value={statistics.totalUsers}
-					unit="人"
-				/>
-				<StatisticsItem
-					label="総ハイスコア"
-					value={formatScore(statistics.totalScore)}
-					unit=""
-				/>
+			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-12 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
+				<p className="text-brand-main text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium">
+					2025年・2026年 総計
+				</p>
+				<div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20">
+					<StatisticsItem
+						label="総プレイ数"
+						value={statistics.totalCredits}
+						unit="回"
+					/>
+					<StatisticsItem
+						label="総ユーザー数"
+						value={statistics.totalUsers}
+						unit="人"
+					/>
+					<StatisticsItem
+						label="総ハイスコア"
+						value={formatScore(statistics.totalScore)}
+						unit=""
+					/>
+				</div>
 			</div>
 		</div>
 	);

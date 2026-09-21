@@ -46,8 +46,8 @@ export function getEventPhase(date = new Date()): EventPhase {
 export const eventPhaseText = {
 	before: {
 		topConnector: "に向けて",
-		topStatus: "開発中",
-		statistics: `${eventInformation.year}に向けて開発中！`,
+		topStatus: "準備中",
+		statistics: `${eventInformation.year}に向けて準備中！`,
 	},
 	during: {
 		topConnector: "にて",
