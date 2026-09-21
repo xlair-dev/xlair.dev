@@ -1,4 +1,4 @@
-import { eventInformation } from "@/lib/event";
+import { eventInformation, eventPhaseText, getEventPhase } from "@/lib/event";
 import type { GlobalStatistics } from "@/lib/statistics";
 
 /**
@@ -47,10 +47,12 @@ interface StatisticsSectionProps {
 export default function StatisticsSection({
 	statistics,
 }: StatisticsSectionProps) {
+	const eventPhase = getEventPhase();
 	return (
 		<div className="flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 my-8 sm:my-12 md:my-16 lg:my-20">
 			<p className="text-brand-main text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium">
-				{eventInformation.name}にて公開中！
+				{eventInformation.name}
+				{eventPhaseText[eventPhase].statistics}
 			</p>
 			<div className="brand-border rounded-4xl sm:rounded-full w-[75vw] sm:w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 px-12 sm:px-12 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 lg:py-20">
 				<StatisticsItem
