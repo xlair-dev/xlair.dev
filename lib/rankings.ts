@@ -48,33 +48,45 @@ function sheetRankingCategories(musicCatalog: readonly SyncedMusic[]) {
 		);
 }
 
-export async function getRankingCategories(): Promise<RankingCategoryOption[]> {
-	const musicCatalog = await getMusicCatalog();
+const aggregateRankingCategories: RankingCategoryOption[] = [
+	{
+		id: "total-score",
+		label: "総計ハイスコア",
+		endpoint: "/rankings/total-score",
+		valueKey: "totalScore",
+		valueLabel: "総計ハイスコア",
+	},
+	{
+		id: "rating",
+		label: "レーティング",
+		endpoint: "/rankings/rating",
+		valueKey: "rating",
+		valueLabel: "レーティング",
+	},
+	{
+		id: "xp",
+		label: "XP",
+		endpoint: "/rankings/xp",
+		valueKey: "xp",
+		valueLabel: "XP",
+	},
+];
 
-	return [
-		{
-			id: "total-score",
-			label: "総計ハイスコア",
-			endpoint: "/rankings/total-score",
-			valueKey: "totalScore",
-			valueLabel: "総計ハイスコア",
-		},
-		...sheetRankingCategories(musicCatalog),
-		{
-			id: "rating",
-			label: "レーティング",
-			endpoint: "/rankings/rating",
-			valueKey: "rating",
-			valueLabel: "レーティング",
-		},
-		{
-			id: "xp",
-			label: "XP",
-			endpoint: "/rankings/xp",
-			valueKey: "xp",
-			valueLabel: "XP",
-		},
-	];
+/**
+ * Builds ranking categories, omitting song-level categories when the music catalog is unavailable.
+ */
+export async function getRankingCategories(): Promise<RankingCategoryOption[]> {
+	try {
+		const musicCatalog = await getMusicCatalog();
+		return [
+			aggregateRankingCategories[0],
+			...sheetRankingCategories(musicCatalog),
+			...aggregateRankingCategories.slice(1),
+		];
+	} catch (error) {
+		console.error("Failed to load music catalog for ranking categories:", error);
+		return [...aggregateRankingCategories];
+	}
 }
 
 /**
