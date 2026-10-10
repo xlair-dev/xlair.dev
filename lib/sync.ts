@@ -63,7 +63,7 @@ async function fetchM2MToken(): Promise<string> {
 }
 
 /**
- * Synchronizes the server-owned music catalog before the Next.js server accepts requests.
+ * Synchronizes the server-owned music catalog when a feature needs it.
  * @requires API_BASE_URL - Absolute HTTP(S) URL of the API server
  * @requires AUTH0_AUDIENCE - Auth0 API audience accepted by server
  * @requires AUTH0_ISSUER - Auth0 tenant issuer URL
