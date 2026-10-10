@@ -84,7 +84,10 @@ export async function getRankingCategories(): Promise<RankingCategoryOption[]> {
 			...aggregateRankingCategories.slice(1),
 		];
 	} catch (error) {
-		console.error("Failed to load music catalog for ranking categories:", error);
+		console.error(
+			"Failed to load music catalog for ranking categories:",
+			error,
+		);
 		return [...aggregateRankingCategories];
 	}
 }
