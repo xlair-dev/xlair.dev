@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Noto_Sans_JP } from "next/font/google";
+import { Bruno_Ace, Jost, Noto_Sans_JP } from "next/font/google";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { eventDescription, eventInformation } from "@/lib/event";
@@ -18,6 +18,13 @@ const jost = Jost({
 	subsets: ["latin"],
 	weight: ["200", "300", "400", "500", "700"],
 	variable: "--font-jost",
+	display: "swap",
+});
+
+const brunoAce = Bruno_Ace({
+	subsets: ["latin"],
+	weight: "400",
+	variable: "--font-bruno-ace",
 	display: "swap",
 });
 
@@ -98,7 +105,10 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="ja" className={`${notoSansJP.variable} ${jost.variable}`}>
+		<html
+			lang="ja"
+			className={`${notoSansJP.variable} ${jost.variable} ${brunoAce.variable}`}
+		>
 			<body className={notoSansJP.className}>{children}</body>
 		</html>
 	);

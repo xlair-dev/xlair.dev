@@ -68,9 +68,7 @@ export default function MembersPage() {
 							<ul>
 								{team.members.map((member) => (
 									<li key={member.name} className="member-card">
-										<div className="member-avatar" aria-hidden="true">
-											{member.name.slice(0, 1)}
-										</div>
+										<div className="member-avatar" aria-hidden="true" />
 										<div className="member-card__info">
 											<p className="member-card__name">{member.name}</p>
 											<p className="member-card__role">{member.role}</p>

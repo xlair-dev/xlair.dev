@@ -54,15 +54,15 @@ export default function Heading({
 		: `${defaultTextClasses} ${textSizeClassName}`;
 
 	return (
-		<HeadingTag
-			className={`m-0 flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 ${className}`}
-		>
+		<HeadingTag className={`section-heading ${className}`}>
 			<TopLeftTriangle
-				className={`${triangleClassName} ${triangleSizeClassName}`}
+				className={`section-heading__triangle section-heading__triangle--start ${triangleClassName} ${triangleSizeClassName}`}
 			/>
-			<span className={combinedTextClassName}>{children}</span>
+			<span className={`section-heading__text ${combinedTextClassName}`}>
+				{children}
+			</span>
 			<TopRightTriangle
-				className={`${triangleClassName} ${triangleSizeClassName}`}
+				className={`section-heading__triangle section-heading__triangle--end ${triangleClassName} ${triangleSizeClassName}`}
 			/>
 		</HeadingTag>
 	);
