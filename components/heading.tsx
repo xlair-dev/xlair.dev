@@ -45,7 +45,7 @@ export default function Heading({
 	textClassName = "",
 	triangleClassName = "text-brand-main",
 	triangleSizeClassName = "w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14",
-	textSizeClassName = "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl",
+	textSizeClassName = "text-[64px] max-[700px]:text-[28px]",
 }: HeadingProps) {
 	const HeadingTag = as;
 	const defaultTextClasses = "text-brand-main";
