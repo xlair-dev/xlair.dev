@@ -1,19 +1,17 @@
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
-import BrandBlurBackground from "@/components/brand-blur-background";
 import { CategorySelector } from "@/components/category-selector";
-import Footer from "@/components/footer";
 import Heading from "@/components/heading";
-import ObiStrip from "@/components/obi-strip";
+import PageShell from "@/components/page-shell";
+import RankingDistributionChart from "@/components/ranking-distribution-chart";
 import { fetchApi } from "@/lib/api";
 import {
 	getRankingCategories,
 	type RankingCategoryOption,
 	type RankingDisplayEntry,
+	type RankingDistributionBin,
 	toDisplayEntries,
+	toDistributionBins,
 } from "@/lib/rankings";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +24,7 @@ interface RankingsPageProps {
 
 interface FetchResult {
 	entries: RankingDisplayEntry[];
+	distribution: RankingDistributionBin[];
 	error: string | null;
 }
 
@@ -37,50 +36,43 @@ const ORDINAL_SUFFIX_MAP: Record<number, string> = {
 
 function getOrdinalSuffix(rank: number): string {
 	const remainder = rank % 100;
-	if (remainder >= 11 && remainder <= 13) {
-		return "th";
-	}
-
+	if (remainder >= 11 && remainder <= 13) return "th";
 	return ORDINAL_SUFFIX_MAP[rank % 10] ?? "th";
 }
 
-/**
- * Fetches ranking entries for the specified category.
- * @param category - Target ranking category
- * @returns Ranking entries and optional error message
- * @requires API_BASE_URL - Base URL of the API server
- */
 async function fetchRankingEntries(
 	category: RankingCategoryOption,
 ): Promise<FetchResult> {
 	try {
 		const response = await fetchApi(category.endpoint);
 		if (!response) {
-			console.warn(
-				"API_BASE_URL is not configured correctly. Rankings will not be displayed.",
-			);
-			return { entries: [], error: "API の接続設定がされていません。" };
+			return {
+				entries: [],
+				distribution: [],
+				error: "API の接続設定がされていません。",
+			};
 		}
-
 		if (!response.ok) {
 			console.error(
 				`Failed to fetch rankings (${category.id}): ${response.status} ${response.statusText}`,
 			);
 			return {
 				entries: [],
+				distribution: [],
 				error: "ランキングを取得できませんでした。",
 			};
 		}
-
-		const data = await response.json();
+		const data: unknown = await response.json();
 		return {
 			entries: toDisplayEntries(data, category.valueKey),
+			distribution: toDistributionBins(data),
 			error: null,
 		};
 	} catch (error) {
 		console.error(`Error fetching rankings (${category.id}):`, error);
 		return {
 			entries: [],
+			distribution: [],
 			error: "ランキングを取得できませんでした。",
 		};
 	}
@@ -95,146 +87,96 @@ function RankingList({
 	selectedCategory: RankingCategoryOption;
 	error: string | null;
 }) {
-	if (error) {
+	if (error)
 		return (
-			<p className="text-red-500 text-sm sm:text-base text-center">{error}</p>
-		);
-	}
-
-	if (entries.length === 0) {
-		return (
-			<p className="text-gray-500 text-sm sm:text-base text-center">
-				ランキング情報がありません。
+			<p className="ranking-message" role="alert">
+				{error}
 			</p>
 		);
-	}
+	if (entries.length === 0)
+		return <p className="ranking-message">ランキング情報がありません。</p>;
 
 	return (
-		<div className="flex flex-col items-center gap-4 sm:gap-6 w-full">
-			{entries.map((entry) => (
-				<div
-					key={`${selectedCategory.id}-${entry.rank}-${entry.displayName}`}
-					className="flex items-center gap-2 sm:gap-6 w-full"
-				>
-					<div className="w-16 sm:w-24 md:w-28 h-16 sm:h-24 md:h-28 flex justify-center items-center relative">
-						{entry.rank === 1 && (
-							<Image
-								src="/icon_1st.svg"
-								alt=""
-								fill
-								className="object-contain -translate-y-3"
-								aria-hidden="true"
-							/>
-						)}
-						{entry.rank === 2 && (
-							<Image
-								src="/icon_2nd.svg"
-								alt=""
-								fill
-								className="object-contain -translate-y-3"
-								aria-hidden="true"
-							/>
-						)}
-						{entry.rank === 3 && (
-							<Image
-								src="/icon_3rd.svg"
-								alt=""
-								fill
-								className="object-contain -translate-y-3"
-								aria-hidden="true"
-							/>
-						)}
-						<span
-							className={`font-semibold relative z-10 flex items-baseline ${
-								entry.rank === 1
-									? "text-brand-sub"
-									: entry.rank === 2
-										? "text-brand-main"
-										: "text-gray-600"
-							}`}
+		<section
+			className="ranking-results"
+			aria-label={`${selectedCategory.label}ランキング`}
+		>
+			<div className="ranking-results__labels" aria-hidden="true">
+				<span>NAME</span>
+				<span>{selectedCategory.valueLabel.toUpperCase()}</span>
+			</div>
+			<ol className="ranking-list">
+				{entries.map((entry) => (
+					<li
+						key={`${selectedCategory.id}-${entry.rank}-${entry.displayName}`}
+						className="ranking-row"
+					>
+						<div
+							className={`ranking-row__rank ranking-row__rank--${entry.rank <= 3 ? entry.rank : "regular"}`}
 						>
-							<span className="text-3xl sm:text-5xl md:text-6xl">
-								{entry.rank}
-							</span>
-							<span className="text-lg sm:text-2xl md:text-3xl">
-								{getOrdinalSuffix(entry.rank)}
-							</span>
-						</span>
-					</div>
-					<div className="flex-1 rounded-3xl px-4 sm:px-6 md:px-10 py-4 sm:py-5">
-						<p className="text-gray-600 text-lg sm:text-xl md:text-2xl font-medium text-center sm:text-left">
-							{entry.displayName}
-						</p>
-						<div className="h-px bg-brand-sub my-3 sm:my-4" />
-						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-center sm:text-left">
-							<span className="hidden sm:inline text-gray-600 text-base sm:text-lg">
-								{selectedCategory.valueLabel}
-							</span>
-							<span className="text-gray-600 text-xl sm:text-2xl md:text-3xl font-semibold">
-								{entry.value}
+							{entry.rank <= 3 && (
+								<Image
+									src={`/icon_${entry.rank === 1 ? "1st" : entry.rank === 2 ? "2nd" : "3rd"}.svg`}
+									alt=""
+									width={58}
+									height={58}
+									aria-hidden="true"
+								/>
+							)}
+							<span className="ranking-row__rank-label">
+								<strong className="ranking-row__number">{entry.rank}</strong>
+								<small className="ranking-row__suffix">
+									{getOrdinalSuffix(entry.rank)}
+								</small>
 							</span>
 						</div>
-					</div>
-				</div>
-			))}
-		</div>
+						<p className="ranking-row__name">{entry.displayName}</p>
+						<p className="ranking-row__value">
+							{new Intl.NumberFormat("ja-JP").format(entry.value)}
+						</p>
+					</li>
+				))}
+			</ol>
+		</section>
 	);
 }
 
 export default async function RankingsPage(props: RankingsPageProps) {
 	const rankingCategories = await getRankingCategories();
-	const defaultCategory = rankingCategories[0];
 	const searchParams = await props.searchParams;
 	const categoryParam = searchParams?.category;
 	const categoryId =
-		typeof categoryParam === "string" ? categoryParam : defaultCategory.id;
+		typeof categoryParam === "string" ? categoryParam : rankingCategories[0].id;
 	const selectedCategory =
 		rankingCategories.find((category) => category.id === categoryId) ??
-		defaultCategory;
-
-	const { entries, error } = await fetchRankingEntries(selectedCategory);
+		rankingCategories[0];
+	const { entries, distribution, error } =
+		await fetchRankingEntries(selectedCategory);
 
 	return (
-		<BrandBlurBackground offset="50vh">
-			<ObiStrip
-				height={{
-					base: "160px",
-					sm: "200px",
-					lg: "240px",
-				}}
-			/>
-			<Link
-				href="/"
-				className="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full border border-brand-main bg-white text-brand-main hover:text-white hover:bg-brand-main transition-colors duration-300 flex items-center justify-center z-50"
-				aria-label="トップページに戻る"
-			>
-				<FontAwesomeIcon
-					icon={faArrowLeft}
-					className="text-base sm:text-lg md:text-xl lg:text-2xl"
-				/>
-			</Link>
-			<main className="relative min-h-svh flex flex-col items-center gap-4 sm:gap-6 md:gap-8 px-4 pb-24 pt-32 sm:pt-40">
-				<div className="flex flex-col items-center gap-4 sm:gap-6 text-center">
-					<Heading className="justify-center">RANKING</Heading>
-					<p className="text-gray-600 text-xs sm:text-base md:text-lg leading-relaxed my-6 sm:my-12 md:my-16">
-						雙峰祭期間中のプレイヤーのレートや
-						XP、各楽曲のハイスコアを確認できます。
-						<br />
-						ベストスコアを更新して、総合ランキングの頂点を目指しましょう。
-					</p>
-				</div>
-				<div className="flex flex-col items-center gap-10 sm:gap-12 w-full max-w-4xl">
-					<Suspense fallback={<div className="h-16" />}>
-						<CategorySelector categories={rankingCategories} />
-					</Suspense>
-					<RankingList
-						entries={entries}
-						selectedCategory={selectedCategory}
-						error={error}
+		<PageShell>
+			<main className="rankings-page">
+				<Heading as="h1">RANKING</Heading>
+				<p className="rankings-page__description">
+					雙峰祭期間中のプレイヤーのレートやXP、各楽曲のハイスコアを確認できます。
+					<br className="desktop-break" />
+					ベストスコアを更新して、総合ランキングの頂点を目指しましょう。
+				</p>
+				<Suspense fallback={<div className="ranking-selector-placeholder" />}>
+					<CategorySelector categories={rankingCategories} />
+				</Suspense>
+				<div className="ranking-chart-frame">
+					<RankingDistributionChart
+						bins={distribution}
+						label={selectedCategory.valueLabel}
 					/>
 				</div>
+				<RankingList
+					entries={entries}
+					selectedCategory={selectedCategory}
+					error={error}
+				/>
 			</main>
-			<Footer />
-		</BrandBlurBackground>
+		</PageShell>
 	);
 }

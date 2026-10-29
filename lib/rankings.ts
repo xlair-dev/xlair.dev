@@ -20,6 +20,12 @@ export interface RankingDisplayEntry {
 	value: number;
 }
 
+export interface RankingDistributionBin {
+	rangeStart: number;
+	rangeEnd: number;
+	playerCount: number;
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
 	return typeof value === "object" && value !== null;
 }
@@ -131,4 +137,23 @@ export function toDisplayEntries(
 			];
 		})
 		.slice(0, 20);
+}
+
+export function toDistributionBins(data: unknown): RankingDistributionBin[] {
+	if (!isRecord(data) || !isRecord(data.distribution)) return [];
+	const { bins } = data.distribution;
+	if (!Array.isArray(bins) || bins.length > 20) return [];
+	const parsed = bins.flatMap((item) => {
+		if (!isRecord(item)) return [];
+		const { rangeStart, rangeEnd, playerCount } = item;
+		if (
+			!isNonNegativeInteger(rangeStart) ||
+			!isNonNegativeInteger(rangeEnd) ||
+			!isNonNegativeInteger(playerCount) ||
+			rangeStart > rangeEnd
+		)
+			return [];
+		return [{ rangeStart, rangeEnd, playerCount }];
+	});
+	return parsed.length === bins.length ? parsed : [];
 }
