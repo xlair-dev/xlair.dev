@@ -1,180 +1,219 @@
 import Image from "next/image";
 import Link from "next/link";
-import BrandBlurBackground from "@/components/brand-blur-background";
-import Footer from "@/components/footer";
 import Heading from "@/components/heading";
 import NavigationArrow from "@/components/navigation-arrow";
-import ObiStrip from "@/components/obi-strip";
-import StatisticsSection from "@/components/statistics-section";
+import PageShell from "@/components/page-shell";
 import { fetchApi } from "@/lib/api";
-import { eventInformation, eventPhaseText, getEventPhase } from "@/lib/event";
+import { eventInformation } from "@/lib/event";
 import { type GlobalStatistics, parseGlobalStatistics } from "@/lib/statistics";
 
 export const revalidate = 60;
 
-/**
- * Fetches global statistics from the API server.
- * @returns Global statistics or null if fetch fails
- * @requires API_BASE_URL - Base URL of the API server
- */
 async function fetchStatistics(): Promise<GlobalStatistics | null> {
 	try {
 		const response = await fetchApi("/statistics/summary", 5);
-		if (!response) {
-			console.warn(
-				"API_BASE_URL is not configured correctly. Statistics will not be displayed.",
-			);
-			return null;
-		}
-
-		if (!response.ok) {
-			console.error(
-				`Failed to fetch statistics: ${response.status} ${response.statusText}`,
-			);
-			return null;
-		}
-
-		const statistics = parseGlobalStatistics(await response.json());
-		if (!statistics) {
-			console.error("Statistics response does not match the API contract.");
-			return null;
-		}
-
-		return statistics;
+		if (!response?.ok) return null;
+		return parseGlobalStatistics(await response.json());
 	} catch (error) {
 		console.error("Error fetching statistics:", error);
 		return null;
 	}
 }
 
+const gallery = [
+	{ src: "/gallery/xlair-gameplay.png", alt: "XLAIRのゲーム画面" },
+	{ src: "/gallery/xlair-tracks.png", alt: "XLAIRの収録楽曲" },
+	{ src: "/gallery/sohosai-2025.png", alt: "2025年の雙峰祭で展示したXLAIR" },
+] as const;
+
+function HeroStatistics({
+	statistics,
+}: {
+	statistics: GlobalStatistics | null;
+}) {
+	if (!statistics) return null;
+	return (
+		<section className="hero-statistics" aria-label="XLAIRのプレイ統計">
+			<div>
+				<span className="hero-statistics__label">総プレイ数</span>
+				<strong>
+					{statistics.totalCredits}
+					<small className="hero-statistics__unit">回</small>
+				</strong>
+			</div>
+			<div>
+				<span className="hero-statistics__label">総ユーザー数</span>
+				<strong>
+					{statistics.totalUsers}
+					<small className="hero-statistics__unit">人</small>
+				</strong>
+			</div>
+			<div>
+				<span className="hero-statistics__label">総スコア</span>
+				<strong>{Math.floor(statistics.totalScore / 1000)}k</strong>
+			</div>
+		</section>
+	);
+}
+
 export default async function Home() {
 	const statistics = await fetchStatistics();
-	const eventPhase = getEventPhase();
-	const phaseText = eventPhaseText[eventPhase];
 	return (
-		<BrandBlurBackground offset="95vh">
-			<ObiStrip
-				height={{
-					base: "160px",
-					sm: "240px",
-					lg: "320px",
-				}}
-			/>
-			<main className="relative min-h-svh flex flex-col items-center justify-center px-4">
-				<div
-					className="absolute -left-20 top-0 h-svh w-auto opacity-80"
-					style={{
-						maskImage: "linear-gradient(to bottom, transparent 0%, black 30%)",
-						WebkitMaskImage:
-							"linear-gradient(to bottom, transparent 0%, black 30%)",
-					}}
-				>
-					<Image
-						src="/effect.png"
-						alt=""
-						width={700}
-						height={1000}
-						className="h-svh w-auto"
-						aria-hidden="true"
-					/>
-				</div>
-				<p className="text-brand-main text-sm sm:text-base md:text-lg lg:text-xl text-center">
-					ー リズム型アクションゲーム ー
-				</p>
-				<Image
-					src="/logo.svg"
-					alt="xlair"
-					width={800}
-					height={400}
-					className="w-[90vw] sm:w-[80vw] h-auto max-w-[1080px]"
-					priority
-				/>
-				<div className="text-brand-main font-medium mt-4 sm:mt-6 flex flex-col sm:flex-row items-center gap-0 sm:gap-2 md:gap-3">
-					<div className="flex flex-row items-center text-4xl sm:text-4xl md:text-4xl lg:text-5xl">
-						<p>{eventInformation.startDate}</p>
-						<NavigationArrow className="text-brand-main-light w-8 h-8 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 translate-y-1" />
-						<p>{eventInformation.endDate}</p>
-					</div>
-					<div className="flex flex-row items-end text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-						<p>{eventInformation.name}</p>
-						<p className="text-xl md:text-2xl lg:text-3xl">
-							{phaseText.topConnector}
-						</p>
-						<p>{phaseText.topStatus}</p>
-					</div>
-				</div>
-			</main>
-			<div className="flex flex-col items-center gap-6 sm:gap-9 md:gap-12 lg:gap-16 my-16 sm:my-20 md:my-24 lg:my-28">
-				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
-					<Heading>ABOUT</Heading>
-					<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 text-center">
-						<div className="flex items-end gap-1 sm:gap-3 md:gap-4">
+		<PageShell>
+			<main>
+				<section className="hero" aria-labelledby="hero-title">
+					<div className="hero__decoration" aria-hidden="true" />
+					<div className="hero__content">
+						<p className="hero__eyebrow">ー リズムアクション型ゲーム ー</p>
+						<h1 id="hero-title" className="hero__logo">
 							<Image
-								src="/logo.svg"
+								src="/logo.webp"
 								alt="XLAIR"
-								width={200}
-								height={100}
-								className="w-40 sm:w-72 md:w-80 lg:w-96 h-auto"
+								width={2397}
+								height={451}
+								loading="eager"
 							/>
-							<p className="text-brand-main text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
-								とは
+						</h1>
+						<div className="hero__date">
+							<span className="hero__year">{eventInformation.year}</span>
+							<p>
+								<span className="event-card__date-label">
+									10.31<small>（土）</small>
+								</span>
+								<NavigationArrow aria-hidden="true" />
+								<span className="event-card__date-label">
+									11.01<small>（日）</small>
+								</span>
 							</p>
+							<strong>筑波大学「雙峰祭」にて展示</strong>
 						</div>
-						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
-							画面に流れるノーツに合わせて、
-							<br />
-							スライダーをなぞったりボタンを押したりして
-							<br />
-							楽曲を演奏するオリジナルリズム型アクションゲームです。
-						</p>
-						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
-							実際の筐体を使って操作し、
-							<br />
-							音楽に合わせて手を動かす楽しさをぜひ体験してください。
-						</p>
+						<HeroStatistics statistics={statistics} />
 					</div>
-				</div>
-				{statistics && <StatisticsSection statistics={statistics} />}
-				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
-					<Heading>INFO</Heading>
-					<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 px-12 sm:px-16 md:px-20 lg:px-24 py-8 sm:py-20 md:py-24 lg:py-28">
-						<div className="flex flex-row items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-600 font-medium">
-							<p>{eventInformation.startDate}</p>
-							<NavigationArrow className="text-brand-main-light w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 translate-y-1" />
-							<p>{eventInformation.endDate}</p>
+				</section>
+
+				<section id="about" className="home-section about-section">
+					<Heading>ABOUT</Heading>
+					<div className="about-section__grid">
+						<div className="video-frame">
+							<iframe
+								src="https://www.youtube-nocookie.com/embed/-ibQZIVq8Rw"
+								title="XLAIR 企画 CM"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								referrerPolicy="strict-origin-when-cross-origin"
+								allowFullScreen
+								loading="lazy"
+							/>
 						</div>
-						<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
+						<div className="about-section__copy">
+							<div className="about-section__brand">
+								<Image src="/logo.webp" alt="XLAIR" width={2397} height={451} />
+								<strong>とは</strong>
+							</div>
+							<p>
+								XLAIR（エクレア）は、大学4年生のチームで作り上げたオリジナルリズムアクションゲームです。
+							</p>
+							<p>
+								流れる楽曲に合わせて、画面に流れるノーツをスライダーやボタンの操作でリズミカルにタップし、楽曲を演奏します。
+							</p>
+							<p>
+								雙峰祭2年目となる今年は、収録楽曲がさらに増加し、ゲームシステムもパワーアップ。実際の筐体で音楽に合わせて手を動かす楽しさを体験してください。
+							</p>
+							<div className="outline-links">
+								<Link href="/music" className="outline-link">
+									収録楽曲 <span aria-hidden="true">›</span>
+								</Link>
+								<Link href="/rankings" className="outline-link">
+									ランキング <span aria-hidden="true">›</span>
+								</Link>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section className="gallery-section" aria-labelledby="gallery-title">
+					<h2 id="gallery-title" className="sr-only">
+						ゲーム画面と前回の展示
+					</h2>
+					<div className="gallery-strip">
+						{gallery.map((image) => (
+							<figure key={image.src} className="gallery-strip__item">
+								<Image
+									src={image.src}
+									alt={image.alt}
+									width={2577}
+									height={1924}
+									sizes="(max-width: 640px) 78vw, 32vw"
+								/>
+							</figure>
+						))}
+					</div>
+					<p>ゲーム画面や去年の展示の様子</p>
+				</section>
+
+				<section id="information" className="home-section information-section">
+					<Heading>INFORMATION</Heading>
+					<div className="event-card">
+						<div className="event-card__dates">
+							<div>
+								<span>
+									本祭
+									<br />
+									1日目
+								</span>
+								<p>
+									<small>2026</small>10.31<small>（土）</small>
+								</p>
+							</div>
+							<div>
+								<span>
+									本祭
+									<br />
+									2日目
+								</span>
+								<p>
+									<small>2026</small>11.01<small>（日）</small>
+								</p>
+							</div>
+						</div>
+						<p className="event-card__detail">
+							<span className="event-card__icon" aria-hidden="true">
+								⌖
+							</span>
 							{eventInformation.venue}
 						</p>
-						<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
-							<span className="text-gray-600">1PLAY</span>{" "}
-							<span className="text-brand-main">
-								¥{eventInformation.playPrice}
+						<p className="event-card__detail">
+							<span className="event-card__icon" aria-hidden="true">
+								¥
 							</span>
+							1 PLAY&nbsp; {eventInformation.playPrice}円
 						</p>
 					</div>
-				</div>
-			</div>
-			<Footer />
-			<Link
-				href="/rankings"
-				className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 px-4 sm:px-8 md:px-10 py-2 sm:py-4 md:py-5 rounded-full border border-brand-sub bg-white text-brand-sub hover:text-white hover:bg-brand-sub transition-colors duration-300 text-sm sm:text-lg md:text-xl font-medium whitespace-nowrap z-50 flex items-center gap-2 sm:gap-4"
-			>
-				<div className="w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 flex justify-center items-center relative shrink-0">
-					<Image
-						src="/icon_1st.svg"
-						alt=""
-						fill
-						className="object-contain -translate-y-1 sm:-translate-y-3"
-						aria-hidden="true"
-					/>
-					<span className="font-semibold relative z-10 flex items-baseline text-brand-sub">
-						<span className="text-xl sm:text-3xl md:text-4xl">1</span>
-						<span className="text-xs sm:text-lg md:text-xl">st</span>
-					</span>
-				</div>
-				ランキングはこちら！
-			</Link>
-		</BrandBlurBackground>
+					<p className="information-section__intro">
+						企画の場所や開催情報は、雙峰祭公式の企画検索システムから確認できます。
+					</p>
+					<a
+						className="outline-link information-section__button"
+						href="https://search.sohosai.com/project/130"
+						target="_blank"
+						rel="noreferrer"
+					>
+						企画の情報はこちら <span aria-hidden="true">›</span>
+					</a>
+				</section>
+
+				<section className="home-section updates-section">
+					<Heading>FOLLOW US</Heading>
+					<p>XLAIRの最新情報は公式Xでお知らせします。</p>
+					<a
+						className="solid-link"
+						href="https://x.com/XLAIR_Project"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Xの投稿をチェック <span aria-hidden="true">↗</span>
+					</a>
+				</section>
+			</main>
+		</PageShell>
 	);
 }

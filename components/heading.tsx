@@ -7,6 +7,8 @@ interface HeadingProps {
 	 * The text content of the heading
 	 */
 	children: ReactNode;
+	/** The semantic heading level. */
+	as?: "h1" | "h2" | "h3";
 	/**
 	 * Additional CSS classes for the container
 	 */
@@ -38,20 +40,22 @@ interface HeadingProps {
  */
 export default function Heading({
 	children,
+	as = "h2",
 	className = "",
 	textClassName = "",
 	triangleClassName = "text-brand-main",
 	triangleSizeClassName = "w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14",
 	textSizeClassName = "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl",
 }: HeadingProps) {
+	const HeadingTag = as;
 	const defaultTextClasses = "text-brand-main";
 	const combinedTextClassName = textClassName
 		? `${defaultTextClasses} ${textSizeClassName} ${textClassName}`
 		: `${defaultTextClasses} ${textSizeClassName}`;
 
 	return (
-		<div
-			className={`flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 ${className}`}
+		<HeadingTag
+			className={`m-0 flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 ${className}`}
 		>
 			<TopLeftTriangle
 				className={`${triangleClassName} ${triangleSizeClassName}`}
@@ -60,6 +64,6 @@ export default function Heading({
 			<TopRightTriangle
 				className={`${triangleClassName} ${triangleSizeClassName}`}
 			/>
-		</div>
+		</HeadingTag>
 	);
 }
