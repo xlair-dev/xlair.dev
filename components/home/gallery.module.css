@@ -3,7 +3,7 @@
 	--gallery-half-gap: 13px;
 	width: 100vw;
 	align-self: center;
-	margin-top: calc(clamp(40px, 7.5vw, 144px) + 60px);
+	margin-top: 72px;
 	background: transparent;
 }
 

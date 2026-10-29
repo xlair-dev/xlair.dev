@@ -36,18 +36,19 @@ export default function AboutSection() {
 					<p>
 						雙峰祭2年目となる今年は、収録楽曲がさらに増加し、ゲームシステムもパワーアップ。実際の筐体で音楽に合わせて手を動かす楽しさを体験してください。
 					</p>
-					<div
-						className={`${styles.links} flex flex-col gap-3 min-[701px]:flex-row`}
-					>
-						<Link href="/music" className={`${styles.link} brand-border`}>
-							収録楽曲 <span className={styles.arrow} aria-hidden="true" />
-						</Link>
-						<Link href="/rankings" className={`${styles.link} brand-border`}>
-							ランキング <span className={styles.arrow} aria-hidden="true" />
-						</Link>
-					</div>
 				</div>
 			</div>
+			<nav
+				className={`${styles.links} flex flex-col gap-3 min-[701px]:flex-row`}
+				aria-label="XLAIRのページ"
+			>
+				<Link href="/music" className={`${styles.link} brand-border`}>
+					収録楽曲 <span className={styles.arrow} aria-hidden="true" />
+				</Link>
+				<Link href="/rankings" className={`${styles.link} brand-border`}>
+					ランキング <span className={styles.arrow} aria-hidden="true" />
+				</Link>
+			</nav>
 			<Gallery />
 		</section>
 	);

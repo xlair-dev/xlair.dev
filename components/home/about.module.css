@@ -54,6 +54,12 @@
 	font-weight: 500;
 }
 
+.links {
+	width: min(100%, 796px);
+	gap: 76px;
+	margin-top: 21px;
+}
+
 .link {
 	display: inline-flex;
 	min-height: 89px;
@@ -103,7 +109,8 @@
 
 	.links {
 		width: 100%;
-		margin-top: 22px;
+		gap: 12px;
+		margin-top: 12px;
 	}
 
 	.link {
