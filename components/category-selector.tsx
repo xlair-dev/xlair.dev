@@ -1,14 +1,15 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import type { RankingCategoryOption } from "@/lib/rankings";
 
-/**
- * Category selector dropdown for rankings page.
- * Synchronizes selected category with URL query parameters.
- * Categories array must contain at least one entry.
- */
+const aggregateLabels: Record<string, string> = {
+	"total-score": "総計スコア",
+	rating: "レート",
+	xp: "XP",
+};
+
 export function CategorySelector({
 	categories,
 }: {
@@ -16,70 +17,66 @@ export function CategorySelector({
 }) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const detailsRef = useRef<HTMLDetailsElement>(null);
-
-	// Get selected category from URL query parameter
 	const selectedCategory = useMemo(() => {
-		const categoryParam = searchParams.get("category");
-		const categoryId = categoryParam || categories[0].id;
-		return (
-			categories.find((category) => category.id === categoryId) ?? categories[0]
-		);
+		const id = searchParams.get("category") || categories[0]?.id;
+		return categories.find((category) => category.id === id) ?? categories[0];
 	}, [searchParams, categories]);
-	const previousCategoryId = useRef(selectedCategory.id);
+	const sheetCategories = categories.filter((category) =>
+		category.id.startsWith("sheet-"),
+	);
+	const selectedIsSheet = selectedCategory?.id.startsWith("sheet-") ?? false;
 
-	// Close details when category changes
-	useEffect(() => {
-		if (!detailsRef.current) {
-			return;
-		}
-
-		if (previousCategoryId.current === selectedCategory.id) {
-			return;
-		}
-
-		detailsRef.current.open = false;
-		previousCategoryId.current = selectedCategory.id;
-	}, [selectedCategory.id]);
-
-	const handleCategoryChange = (categoryId: string) => {
+	const selectCategory = (id: string) => {
 		const params = new URLSearchParams(searchParams.toString());
-		params.set("category", categoryId);
-		router.replace(`/rankings?${params.toString()}`);
+		params.set("category", id);
+		router.replace(`/rankings?${params.toString()}`, { scroll: false });
 	};
 
 	return (
-		<div className="relative">
-			<details ref={detailsRef} className="relative group">
-				<summary
-					className="border border-brand-sub text-brand-sub text-sm sm:text-base md:text-lg font-medium px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 rounded-full cursor-pointer flex items-center justify-center gap-4"
-					style={{ listStyle: "none" }}
-				>
-					<span>{selectedCategory.label}</span>
-					<span
-						aria-hidden="true"
-						className="text-brand-sub text-xs sm:text-sm"
-					>
-						▼
-					</span>
-				</summary>
-				<div className="absolute left-1/2 top-full mt-2 w-[260px] sm:w-[320px] -translate-x-1/2 bg-white border border-brand-sub/40 rounded-3xl shadow-lg py-2 z-10">
-					{categories.map((category) => (
+		<section className="ranking-selector" aria-label="ランキングの種類">
+			<div className="ranking-selector__tabs">
+				{categories
+					.filter((category) => category.id in aggregateLabels)
+					.map((category) => (
 						<button
 							key={category.id}
 							type="button"
-							onClick={() => handleCategoryChange(category.id)}
-							className={`w-full text-sm sm:text-base text-gray-700 px-4 py-3 transition-colors duration-300 text-left rounded-3xl ${
-								category.id === selectedCategory.id
-									? "bg-brand-sub/15 font-semibold"
-									: "hover:bg-brand-sub/10"
-							}`}
+							aria-pressed={selectedCategory?.id === category.id}
+							className={
+								selectedCategory?.id === category.id ? "is-selected" : ""
+							}
+							onClick={() => selectCategory(category.id)}
 						>
-							{category.label}
+							{aggregateLabels[category.id]}
 						</button>
 					))}
-				</div>
-			</details>
-		</div>
+				<button
+					type="button"
+					disabled={sheetCategories.length === 0}
+					aria-pressed={selectedIsSheet}
+					className={selectedIsSheet ? "is-selected" : ""}
+					onClick={() =>
+						sheetCategories[0] && selectCategory(sheetCategories[0].id)
+					}
+				>
+					曲別スコア
+				</button>
+			</div>
+			{selectedIsSheet && (
+				<label className="ranking-selector__song">
+					<span>楽曲</span>
+					<select
+						value={selectedCategory.id}
+						onChange={(event) => selectCategory(event.target.value)}
+					>
+						{sheetCategories.map((category) => (
+							<option key={category.id} value={category.id}>
+								{category.label}
+							</option>
+						))}
+					</select>
+				</label>
+			)}
+		</section>
 	);
 }

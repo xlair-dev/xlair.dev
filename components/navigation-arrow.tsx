@@ -31,7 +31,7 @@ export default function NavigationArrow({
 			aria-hidden="true"
 			{...props}
 		>
-			<path d="M10 6L16 12L10 18" fill="currentColor" />
+			<path d="M4 3L20 12L4 21Z" fill="currentColor" />
 		</svg>
 	);
 }

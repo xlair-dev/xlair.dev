@@ -14,6 +14,7 @@ export interface SyncedMusic {
 	genre: string;
 	registrationDate: string;
 	isTest: boolean;
+	jacketUrl: string | null;
 	sheets: readonly SyncedSheet[];
 }
 
@@ -55,8 +56,15 @@ function parseMusic(value: unknown): SyncedMusic | null {
 		return null;
 	}
 
-	const { id, title, artist, bpm, genre, registrationDate, isTest } = music;
+	const { id, title, artist, bpm, genre, registrationDate, isTest, jacket } =
+		music;
 	const sheets = value.sheets.map(parseSheet);
+	const jacketUrl =
+		jacket === undefined || jacket === null
+			? null
+			: isRecord(jacket) && typeof jacket.url === "string"
+				? jacket.url
+				: undefined;
 	if (
 		typeof id !== "string" ||
 		typeof title !== "string" ||
@@ -66,6 +74,7 @@ function parseMusic(value: unknown): SyncedMusic | null {
 		typeof genre !== "string" ||
 		typeof registrationDate !== "string" ||
 		typeof isTest !== "boolean" ||
+		jacketUrl === undefined ||
 		sheets.some((sheet) => sheet === null)
 	) {
 		return null;
@@ -79,6 +88,7 @@ function parseMusic(value: unknown): SyncedMusic | null {
 		genre,
 		registrationDate,
 		isTest,
+		jacketUrl,
 		sheets: sheets as SyncedSheet[],
 	};
 }

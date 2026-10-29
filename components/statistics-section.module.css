@@ -1,0 +1,52 @@
+.statistics {
+	width: min(100%, 1005px);
+	min-height: 154px;
+	margin-top: 34px;
+	padding: 18px clamp(28px, 5vw, 80px);
+	border: 3px solid transparent;
+	border-radius: 999px;
+	background:
+		linear-gradient(rgb(255 255 255 / 90%), rgb(255 255 255 / 90%)) padding-box,
+		linear-gradient(105deg, #f6c4ef, #73d9f7) border-box;
+	box-shadow: 0 8px 22px rgb(54 95 114 / 8%);
+}
+
+.statistics strong {
+	color: var(--ink);
+	font-family: var(--font-family-display);
+	font-size: clamp(26px, 2.8vw, 52px);
+	font-weight: 400;
+	white-space: nowrap;
+}
+
+.label {
+	color: var(--muted-ink);
+	font-size: clamp(13px, 1vw, 19px);
+	font-weight: 400;
+	white-space: nowrap;
+}
+
+.unit {
+	padding-left: 0.12em;
+	color: var(--brand-main);
+	font-family: var(--font-noto-sans-jp), sans-serif;
+	font-size: 0.6em;
+}
+
+@media (max-width: 700px) {
+	.statistics {
+		min-height: 84px;
+		margin-top: 0;
+		gap: 3px;
+		padding: 12px 8px;
+		transform: translateY(20px);
+	}
+
+	.statistics strong {
+		font-size: clamp(16px, 5vw, 22px);
+	}
+
+	.label {
+		font-size: 10px;
+	}
+}
