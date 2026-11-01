@@ -9,6 +9,14 @@ export const eventInformation = {
 	endDateKey: "2026-11-01",
 } as const;
 
+/** Formats event date keys in Japan Standard Time to match the event calendar. */
+export function formatEventWeekday(dateKey: string): string {
+	return new Intl.DateTimeFormat("ja-JP", {
+		timeZone: "Asia/Tokyo",
+		weekday: "short",
+	}).format(new Date(`${dateKey}T12:00:00+09:00`));
+}
+
 const tokyoDateFormatter = new Intl.DateTimeFormat("en-CA", {
 	timeZone: "Asia/Tokyo",
 	year: "numeric",

@@ -3,11 +3,12 @@ import { faGithub, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { eventInformation } from "@/lib/event";
 
 const navigationLinks = [
 	{ href: "https://sohosai.com", label: "雙峰祭公式サイト" },
 	{
-		href: "https://search.sohosai.com/projects/6",
+		href: "https://search.sohosai.com/project/130",
 		label: "企画検索システム",
 	},
 ] as const;
@@ -25,7 +26,7 @@ const socialLinks: ReadonlyArray<{
 		external: false,
 	},
 	{
-		href: "https://x.com/xlair_project",
+		href: "https://x.com/XLAIR_Project",
 		label: "X (Twitter)",
 		icon: faXTwitter,
 		external: true,
@@ -95,45 +96,44 @@ function FooterBrand({
 	return (
 		<div className={className}>
 			<Image
-				src="/logo.svg"
+				src="/logo.webp"
 				alt="XLAIR"
-				width={200}
-				height={100}
+				width={2397}
+				height={451}
 				className={logoClassName}
 			/>
-			<p className={copyrightClassName}>© XLAIR Project ALL rights reserved.</p>
+			<p className={copyrightClassName}>
+				© {eventInformation.year} XLAIR Project ALL rights reserved.
+			</p>
 		</div>
 	);
 }
 
 export default function Footer() {
 	return (
-		<footer className="bg-white w-full pt-12 pb-14 sm:pb-12 px-4 sm:px-6 md:px-8 lg:px-12">
-			<div className="max-w-[90vw] mx-auto">
-				<div className="hidden sm:flex justify-between items-center">
+		<footer className="site-footer">
+			<div className="site-footer__inner">
+				<div className="site-footer__desktop">
 					<FooterBrand
-						className="flex flex-col gap-3 sm:gap-4"
-						logoClassName="w-32 sm:w-40 md:w-48 h-auto"
-						copyrightClassName="text-gray-600 text-sm sm:text-base"
+						className="site-footer__brand"
+						logoClassName="site-footer__logo"
+						copyrightClassName="site-footer__copyright"
 					/>
-					<div className="flex items-center gap-4 sm:gap-6 md:gap-8 text-gray-600 text-sm sm:text-base md:text-lg">
-						<FooterNavigation className="flex items-center gap-4 sm:gap-6 md:gap-8" />
+					<div className="site-footer__desktop-links">
+						<FooterNavigation className="site-footer__navigation" />
 						<FooterSocialLinks
-							className="flex items-center gap-4 sm:gap-6 md:gap-8"
-							iconClassName="text-xl sm:text-2xl md:text-3xl"
+							className="site-footer__social"
+							iconClassName=""
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col gap-6 sm:hidden">
-					<FooterSocialLinks
-						className="flex items-center gap-4 justify-center text-gray-600"
-						iconClassName="text-xl"
-					/>
-					<FooterNavigation className="flex flex-col items-center gap-2 text-gray-600 text-sm" />
+				<div className="site-footer__mobile">
+					<FooterSocialLinks className="site-footer__social" iconClassName="" />
+					<FooterNavigation className="site-footer__navigation" />
 					<FooterBrand
-						className="flex flex-col gap-3 items-center"
-						logoClassName="w-24 h-auto"
-						copyrightClassName="text-gray-600 text-xs"
+						className="site-footer__brand"
+						logoClassName="site-footer__logo"
+						copyrightClassName="site-footer__copyright"
 					/>
 				</div>
 			</div>

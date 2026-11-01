@@ -99,6 +99,34 @@
 	--brand-blur-angle: -10deg;
 }
 
+.site-page > .brand-blur-layer .brand-blur-orbit--1 {
+	--brand-blur-origin-x: 10%;
+	--brand-blur-origin-y: 4%;
+	--brand-blur-radius: clamp(24px, 2vw, 48px);
+	--brand-blur-size: clamp(420px, 45vw, 874px);
+}
+
+.site-page > .brand-blur-layer .brand-blur-orbit--2 {
+	--brand-blur-origin-x: 94%;
+	--brand-blur-origin-y: 34%;
+	--brand-blur-radius: clamp(24px, 2vw, 48px);
+	--brand-blur-size: clamp(380px, 40vw, 760px);
+}
+
+.site-page > .brand-blur-layer .brand-blur-orbit--3 {
+	--brand-blur-origin-x: 8%;
+	--brand-blur-origin-y: 62%;
+	--brand-blur-radius: clamp(24px, 2vw, 48px);
+	--brand-blur-size: clamp(460px, 48vw, 900px);
+}
+
+.site-page > .brand-blur-layer .brand-blur-orbit--4 {
+	--brand-blur-origin-x: 85%;
+	--brand-blur-origin-y: 82%;
+	--brand-blur-radius: clamp(24px, 2vw, 48px);
+	--brand-blur-size: clamp(340px, 35vw, 700px);
+}
+
 @keyframes brand-blur-orbit-cw {
 	0% {
 		transform: translate(-50%, -50%)

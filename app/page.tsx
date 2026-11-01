@@ -1,46 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
-import BrandBlurBackground from "@/components/brand-blur-background";
-import Footer from "@/components/footer";
-import Heading from "@/components/heading";
-import NavigationArrow from "@/components/navigation-arrow";
-import ObiStrip from "@/components/obi-strip";
-import StatisticsSection from "@/components/statistics-section";
+import AboutSection from "@/components/home/about";
+import HomeHero from "@/components/home/hero";
+import InformationSection from "@/components/home/information";
+import PageShell from "@/components/page-shell";
 import { fetchApi } from "@/lib/api";
-import { eventInformation, eventPhaseText, getEventPhase } from "@/lib/event";
 import { type GlobalStatistics, parseGlobalStatistics } from "@/lib/statistics";
 
 export const revalidate = 60;
 
-/**
- * Fetches global statistics from the API server.
- * @returns Global statistics or null if fetch fails
- * @requires API_BASE_URL - Base URL of the API server
- */
 async function fetchStatistics(): Promise<GlobalStatistics | null> {
 	try {
 		const response = await fetchApi("/statistics/summary", 5);
-		if (!response) {
-			console.warn(
-				"API_BASE_URL is not configured correctly. Statistics will not be displayed.",
-			);
-			return null;
-		}
-
-		if (!response.ok) {
-			console.error(
-				`Failed to fetch statistics: ${response.status} ${response.statusText}`,
-			);
-			return null;
-		}
-
-		const statistics = parseGlobalStatistics(await response.json());
-		if (!statistics) {
-			console.error("Statistics response does not match the API contract.");
-			return null;
-		}
-
-		return statistics;
+		if (!response?.ok) return null;
+		return parseGlobalStatistics(await response.json());
 	} catch (error) {
 		console.error("Error fetching statistics:", error);
 		return null;
@@ -49,132 +20,13 @@ async function fetchStatistics(): Promise<GlobalStatistics | null> {
 
 export default async function Home() {
 	const statistics = await fetchStatistics();
-	const eventPhase = getEventPhase();
-	const phaseText = eventPhaseText[eventPhase];
 	return (
-		<BrandBlurBackground offset="95vh">
-			<ObiStrip
-				height={{
-					base: "160px",
-					sm: "240px",
-					lg: "320px",
-				}}
-			/>
-			<main className="relative min-h-svh flex flex-col items-center justify-center px-4">
-				<div
-					className="absolute -left-20 top-0 h-svh w-auto opacity-80"
-					style={{
-						maskImage: "linear-gradient(to bottom, transparent 0%, black 30%)",
-						WebkitMaskImage:
-							"linear-gradient(to bottom, transparent 0%, black 30%)",
-					}}
-				>
-					<Image
-						src="/effect.png"
-						alt=""
-						width={700}
-						height={1000}
-						className="h-svh w-auto"
-						aria-hidden="true"
-					/>
-				</div>
-				<p className="text-brand-main text-sm sm:text-base md:text-lg lg:text-xl text-center">
-					ー リズム型アクションゲーム ー
-				</p>
-				<Image
-					src="/logo.svg"
-					alt="xlair"
-					width={800}
-					height={400}
-					className="w-[90vw] sm:w-[80vw] h-auto max-w-[1080px]"
-					priority
-				/>
-				<div className="text-brand-main font-medium mt-4 sm:mt-6 flex flex-col sm:flex-row items-center gap-0 sm:gap-2 md:gap-3">
-					<div className="flex flex-row items-center text-4xl sm:text-4xl md:text-4xl lg:text-5xl">
-						<p>{eventInformation.startDate}</p>
-						<NavigationArrow className="text-brand-main-light w-8 h-8 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 translate-y-1" />
-						<p>{eventInformation.endDate}</p>
-					</div>
-					<div className="flex flex-row items-end text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-						<p>{eventInformation.name}</p>
-						<p className="text-xl md:text-2xl lg:text-3xl">
-							{phaseText.topConnector}
-						</p>
-						<p>{phaseText.topStatus}</p>
-					</div>
-				</div>
+		<PageShell>
+			<main>
+				<HomeHero statistics={statistics} />
+				<AboutSection />
+				<InformationSection />
 			</main>
-			<div className="flex flex-col items-center gap-6 sm:gap-9 md:gap-12 lg:gap-16 my-16 sm:my-20 md:my-24 lg:my-28">
-				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
-					<Heading>ABOUT</Heading>
-					<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 text-center">
-						<div className="flex items-end gap-1 sm:gap-3 md:gap-4">
-							<Image
-								src="/logo.svg"
-								alt="XLAIR"
-								width={200}
-								height={100}
-								className="w-40 sm:w-72 md:w-80 lg:w-96 h-auto"
-							/>
-							<p className="text-brand-main text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
-								とは
-							</p>
-						</div>
-						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
-							画面に流れるノーツに合わせて、
-							<br />
-							スライダーをなぞったりボタンを押したりして
-							<br />
-							楽曲を演奏するオリジナルリズム型アクションゲームです。
-						</p>
-						<p className="text-gray-600 text-xs sm:text-lg md:text-xl lg:text-2xl leading-normal">
-							実際の筐体を使って操作し、
-							<br />
-							音楽に合わせて手を動かす楽しさをぜひ体験してください。
-						</p>
-					</div>
-				</div>
-				{statistics && <StatisticsSection statistics={statistics} />}
-				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
-					<Heading>INFO</Heading>
-					<div className="border border-brand-main w-[90vw] max-w-lg sm:max-w-xl md:max-w-4xl lg:max-w-5xl flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 px-12 sm:px-16 md:px-20 lg:px-24 py-8 sm:py-20 md:py-24 lg:py-28">
-						<div className="flex flex-row items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-600 font-medium">
-							<p>{eventInformation.startDate}</p>
-							<NavigationArrow className="text-brand-main-light w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 translate-y-1" />
-							<p>{eventInformation.endDate}</p>
-						</div>
-						<p className="text-gray-600 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
-							{eventInformation.venue}
-						</p>
-						<p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
-							<span className="text-gray-600">1PLAY</span>{" "}
-							<span className="text-brand-main">
-								¥{eventInformation.playPrice}
-							</span>
-						</p>
-					</div>
-				</div>
-			</div>
-			<Footer />
-			<Link
-				href="/rankings"
-				className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 px-4 sm:px-8 md:px-10 py-2 sm:py-4 md:py-5 rounded-full border border-brand-sub bg-white text-brand-sub hover:text-white hover:bg-brand-sub transition-colors duration-300 text-sm sm:text-lg md:text-xl font-medium whitespace-nowrap z-50 flex items-center gap-2 sm:gap-4"
-			>
-				<div className="w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 flex justify-center items-center relative shrink-0">
-					<Image
-						src="/icon_1st.svg"
-						alt=""
-						fill
-						className="object-contain -translate-y-1 sm:-translate-y-3"
-						aria-hidden="true"
-					/>
-					<span className="font-semibold relative z-10 flex items-baseline text-brand-sub">
-						<span className="text-xl sm:text-3xl md:text-4xl">1</span>
-						<span className="text-xs sm:text-lg md:text-xl">st</span>
-					</span>
-				</div>
-				ランキングはこちら！
-			</Link>
-		</BrandBlurBackground>
+		</PageShell>
 	);
 }

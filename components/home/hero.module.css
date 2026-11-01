@@ -1,0 +1,143 @@
+.hero {
+	position: relative;
+	background:
+		radial-gradient(ellipse at 7% 77%, rgb(244 147 233 / 12%), transparent 38%),
+		radial-gradient(ellipse at 94% 58%, rgb(59 180 234 / 14%), transparent 36%);
+}
+
+.decoration {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: linear-gradient(
+		110deg,
+		transparent 10%,
+		rgb(151 224 248 / 12%) 11%,
+		transparent 12%
+	);
+}
+
+.art {
+	position: absolute;
+	top: 138px;
+	left: -200px;
+	z-index: 0;
+	width: min(41.2vw, 791px);
+	height: auto;
+	opacity: 0.9;
+	mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		#000 24%,
+		#000 80%,
+		transparent
+	);
+	pointer-events: none;
+}
+
+.eyebrow {
+	margin: 0;
+	color: var(--brand-main);
+	font-size: clamp(14px, 1.3vw, 22px);
+}
+
+.logo {
+	width: min(90vw, 1108px);
+	aspect-ratio: 4;
+	margin: -28px 0 0;
+	line-height: 0;
+}
+
+.logo img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.date {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	color: var(--brand-main);
+}
+
+.dateLine {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	gap: clamp(12px, 1vw, 20px);
+}
+
+.year {
+	font-family: var(--font-family-display);
+	font-size: clamp(30px, 2.5vw, 48px);
+}
+
+.days {
+	display: flex;
+	align-items: baseline;
+	gap: clamp(8px, 1vw, 16px);
+	margin: 0;
+	font-family: var(--font-family-display);
+	font-size: clamp(38px, 4.4vw, 84px);
+	font-weight: 400;
+	line-height: 1.1;
+}
+
+.days span {
+	white-space: nowrap;
+}
+
+.days small {
+	margin-left: 0.12em;
+	font-family: var(--font-noto-sans-jp), sans-serif;
+	font-size: 0.36em;
+}
+
+.dateArrow {
+	width: 0.48em;
+	height: 0.48em;
+	color: #73caf3;
+}
+
+.date strong {
+	font-family: var(--font-noto-sans-jp), sans-serif;
+	font-size: clamp(20px, 2vw, 32px);
+	font-weight: 500;
+}
+
+@media (max-width: 700px) {
+	.art {
+		top: 9px;
+		left: -167px;
+		width: min(118vw, 460px);
+	}
+
+	.logo {
+		width: min(90vw, 350px);
+		margin-top: 0;
+	}
+
+	.date {
+		gap: 8px;
+	}
+
+	.dateLine {
+		flex-direction: column;
+		align-items: center;
+		gap: 0;
+	}
+
+	.year {
+		font-size: 28px;
+	}
+
+	.days {
+		font-size: clamp(28px, 8vw, 38px);
+	}
+
+	.date strong {
+		font-size: 16px;
+	}
+}
