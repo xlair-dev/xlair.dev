@@ -7,7 +7,7 @@ import SiteHeader from "@/components/site-header";
 export default function PageShell({ children }: { children: ReactNode }) {
 	return (
 		<BrandBlurBackground className="site-page">
-			<ObiStrip height={{ base: "72px", sm: "90px", lg: "120px" }} />
+			<ObiStrip height={{ base: "160px", sm: "240px", lg: "320px" }} />
 			<SiteHeader />
 			{children}
 			<Footer />

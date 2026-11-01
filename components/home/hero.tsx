@@ -12,7 +12,7 @@ export default function HomeHero({
 }) {
 	return (
 		<section
-			className={`${styles.hero} grid min-h-[1077.75px] place-items-start justify-items-center overflow-hidden px-6 pt-[270px] pb-[100px] max-[700px]:min-h-[590.5px] max-[700px]:place-items-center max-[700px]:px-5 max-[700px]:pt-[104px] max-[700px]:pb-[54px]`}
+			className={`${styles.hero} grid h-svh min-h-svh place-items-start justify-items-center overflow-hidden px-6 pt-[270px] pb-[100px] max-[700px]:place-items-center max-[700px]:px-5 max-[700px]:pt-[104px] max-[700px]:pb-[54px]`}
 			aria-labelledby="hero-title"
 		>
 			<div className={styles.decoration} aria-hidden="true" />
