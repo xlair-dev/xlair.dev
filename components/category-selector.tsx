@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import type { RankingCategoryOption } from "@/lib/rankings";
+import styles from "./category-selector.module.css";
 
 const aggregateLabels: Record<string, string> = {
 	"total-score": "総計スコア",
@@ -33,8 +34,8 @@ export function CategorySelector({
 	};
 
 	return (
-		<section className="ranking-selector" aria-label="ランキングの種類">
-			<div className="ranking-selector__tabs">
+		<section className={styles.selector} aria-label="ランキングの種類">
+			<div className={styles.tabs}>
 				{categories
 					.filter((category) => category.id in aggregateLabels)
 					.map((category) => (
@@ -43,7 +44,7 @@ export function CategorySelector({
 							type="button"
 							aria-pressed={selectedCategory?.id === category.id}
 							className={
-								selectedCategory?.id === category.id ? "is-selected" : ""
+								selectedCategory?.id === category.id ? styles.selected : ""
 							}
 							onClick={() => selectCategory(category.id)}
 						>
@@ -54,7 +55,7 @@ export function CategorySelector({
 					type="button"
 					disabled={sheetCategories.length === 0}
 					aria-pressed={selectedIsSheet}
-					className={selectedIsSheet ? "is-selected" : ""}
+					className={selectedIsSheet ? styles.selected : ""}
 					onClick={() =>
 						sheetCategories[0] && selectCategory(sheetCategories[0].id)
 					}
@@ -63,7 +64,7 @@ export function CategorySelector({
 				</button>
 			</div>
 			{selectedIsSheet && (
-				<label className="ranking-selector__song">
+				<label className={styles.songSelector}>
 					<span>楽曲</span>
 					<select
 						value={selectedCategory.id}

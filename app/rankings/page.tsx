@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { Suspense } from "react";
 import { CategorySelector } from "@/components/category-selector";
 import Heading from "@/components/heading";
 import PageShell from "@/components/page-shell";
 import RankingDistributionChart from "@/components/ranking-distribution-chart";
+import RankingList from "@/components/rankings/ranking-list";
 import { fetchApi } from "@/lib/api";
 import {
 	getRankingCategories,
@@ -13,6 +13,7 @@ import {
 	toDisplayEntries,
 	toDistributionBins,
 } from "@/lib/rankings";
+import styles from "./rankings.module.css";
 
 export const dynamic = "force-dynamic";
 
@@ -26,18 +27,6 @@ interface FetchResult {
 	entries: RankingDisplayEntry[];
 	distribution: RankingDistributionBin[];
 	error: string | null;
-}
-
-const ORDINAL_SUFFIX_MAP: Record<number, string> = {
-	1: "st",
-	2: "nd",
-	3: "rd",
-};
-
-function getOrdinalSuffix(rank: number): string {
-	const remainder = rank % 100;
-	if (remainder >= 11 && remainder <= 13) return "th";
-	return ORDINAL_SUFFIX_MAP[rank % 10] ?? "th";
 }
 
 async function fetchRankingEntries(
@@ -78,69 +67,6 @@ async function fetchRankingEntries(
 	}
 }
 
-function RankingList({
-	entries,
-	selectedCategory,
-	error,
-}: {
-	entries: RankingDisplayEntry[];
-	selectedCategory: RankingCategoryOption;
-	error: string | null;
-}) {
-	if (error)
-		return (
-			<p className="ranking-message" role="alert">
-				{error}
-			</p>
-		);
-	if (entries.length === 0)
-		return <p className="ranking-message">ランキング情報がありません。</p>;
-
-	return (
-		<section
-			className="ranking-results"
-			aria-label={`${selectedCategory.label}ランキング`}
-		>
-			<div className="ranking-results__labels" aria-hidden="true">
-				<span>NAME</span>
-				<span>{selectedCategory.valueLabel.toUpperCase()}</span>
-			</div>
-			<ol className="ranking-list">
-				{entries.map((entry) => (
-					<li
-						key={`${selectedCategory.id}-${entry.rank}-${entry.displayName}`}
-						className="ranking-row"
-					>
-						<div
-							className={`ranking-row__rank ranking-row__rank--${entry.rank <= 3 ? entry.rank : "regular"}`}
-						>
-							{entry.rank <= 3 && (
-								<Image
-									src={`/icon_${entry.rank === 1 ? "1st" : entry.rank === 2 ? "2nd" : "3rd"}.svg`}
-									alt=""
-									width={58}
-									height={58}
-									aria-hidden="true"
-								/>
-							)}
-							<span className="ranking-row__rank-label">
-								<strong className="ranking-row__number">{entry.rank}</strong>
-								<small className="ranking-row__suffix">
-									{getOrdinalSuffix(entry.rank)}
-								</small>
-							</span>
-						</div>
-						<p className="ranking-row__name">{entry.displayName}</p>
-						<p className="ranking-row__value">
-							{new Intl.NumberFormat("ja-JP").format(entry.value)}
-						</p>
-					</li>
-				))}
-			</ol>
-		</section>
-	);
-}
-
 export default async function RankingsPage(props: RankingsPageProps) {
 	const rankingCategories = await getRankingCategories();
 	const searchParams = await props.searchParams;
@@ -155,17 +81,19 @@ export default async function RankingsPage(props: RankingsPageProps) {
 
 	return (
 		<PageShell>
-			<main className="rankings-page">
-				<Heading as="h1">RANKING</Heading>
-				<p className="rankings-page__description">
+			<main className={styles.page}>
+				<Heading as="h1" className={styles.heading}>
+					RANKING
+				</Heading>
+				<p className={styles.description}>
 					雙峰祭期間中のプレイヤーのレートやXP、各楽曲のハイスコアを確認できます。
 					<br className="desktop-break" />
 					ベストスコアを更新して、総合ランキングの頂点を目指しましょう。
 				</p>
-				<Suspense fallback={<div className="ranking-selector-placeholder" />}>
+				<Suspense fallback={<div className={styles.selectorPlaceholder} />}>
 					<CategorySelector categories={rankingCategories} />
 				</Suspense>
-				<div className="ranking-chart-frame">
+				<div className={styles.chartFrame}>
 					<RankingDistributionChart
 						bins={distribution}
 						label={selectedCategory.valueLabel}

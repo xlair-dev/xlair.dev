@@ -8,6 +8,7 @@ import {
 	LinePlot,
 } from "@mui/x-charts";
 import type { RankingDistributionBin } from "@/lib/rankings";
+import styles from "./ranking-distribution-chart.module.css";
 
 const formatValue = new Intl.NumberFormat("ja-JP");
 
@@ -25,16 +26,18 @@ export default function RankingDistributionChart({
 	label: string;
 }) {
 	return (
-		<figure className="distribution-chart" aria-labelledby="distribution-title">
-			<figcaption id="distribution-title">{label}の分布</figcaption>
+		<figure className={styles.chart} aria-labelledby="distribution-title">
+			<figcaption id="distribution-title" className={styles.visuallyHidden}>
+				{label}の分布
+			</figcaption>
 			{bins.length === 0 ? (
-				<p className="distribution-chart__empty" role="status">
+				<p className={styles.chartEmpty} role="status">
 					分布データはありません。
 				</p>
 			) : (
 				<ChartsContainer
 					aria-label={`${label}の公開プレイヤー分布`}
-					className="distribution-chart__canvas"
+					className={styles.chartCanvas}
 					margin={{ top: 14, right: 42, bottom: 34, left: 42 }}
 					xAxis={[
 						{
@@ -75,7 +78,7 @@ export default function RankingDistributionChart({
 				</ChartsContainer>
 			)}
 			{bins.length > 0 && (
-				<table className="sr-only">
+				<table className={styles.visuallyHidden}>
 					<caption>{label}のプレイヤー分布</caption>
 					<thead>
 						<tr>
