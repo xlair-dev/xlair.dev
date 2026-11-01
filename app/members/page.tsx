@@ -1,4 +1,5 @@
 import { faGithub, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Heading from "@/components/heading";
 import PageShell from "@/components/page-shell";
@@ -34,7 +35,12 @@ const teams: { id: string; name: string; members: TeamMember[] }[] = [
 		name: "MUSIC",
 		members: [
 			{ name: "Swkima", role: "Music", github: "swkima-dev", x: "swkima" },
-			{ name: "Tommy", role: "Music" },
+			{
+				name: "Tommy",
+				role: "Music",
+				github: "Tommy-1105",
+				x: "tommw_1k3",
+			},
 		],
 	},
 	{
@@ -111,7 +117,7 @@ export default function MembersPage() {
 							rel="noreferrer"
 							aria-label="TEA website"
 						>
-							⌂
+							<FontAwesomeIcon icon={faGlobe} />
 						</a>
 						<a
 							href="https://x.com/TEA_tkb"
