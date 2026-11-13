@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/xlair-dev/xlair.dev:latest@sha256:c89515b25bf6db190d17644c834a294b8a3f74e1200f8595b306a4f2f5ed7ceb
+    image: ghcr.io/xlair-dev/xlair.dev:latest@sha256:f159b26d533dd09830c0339ff50bf1f07d748af049e69a6a0076327a97827b55
     container_name: xlair-dev
     ports:
       - "${HOST_PORT:-3000}:3000"
