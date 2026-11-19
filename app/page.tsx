@@ -134,6 +134,18 @@ export default async function Home() {
 						</p>
 					</div>
 				</div>
+				<div className="flex flex-col items-center gap-6 px-4 text-center">
+					<Heading>BOOK</Heading>
+					<p className="text-base leading-8 text-gray-600 sm:text-lg">
+						XLAIRの同人誌の中身を、少しだけご紹介します。
+					</p>
+					<Link
+						href="/book"
+						className="rounded-full border border-brand-main bg-white px-8 py-3 font-medium text-brand-main transition-colors hover:bg-brand-main hover:text-white"
+					>
+						同人誌のプレビューを見る
+					</Link>
+				</div>
 				{statistics && <StatisticsSection statistics={statistics} />}
 				<div className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 lg:gap-14 my-8 sm:my-12 md:my-16 lg:my-20">
 					<Heading>INFO</Heading>
